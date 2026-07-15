@@ -1,0 +1,840 @@
+[
+  {
+    "id": "e7d5",
+    "company_id": "co_пао_газэнерго",
+    "company_name": "ПАО ГазЭнерго",
+    "inn": null,
+    "event_type": "new_procurement",
+    "event_description": "ПАО ГазЭнерго: new_procurement",
+    "weight": 7.0,
+    "potential_revenue": 150000000,
+    "detected_at": "2026-07-14T02:00:16.724155+00:00",
+    "recommended_products": [
+      "bank_guarantee",
+      "lending"
+    ],
+    "source": "zakupki",
+    "rationale": "закупка, 150М ₽; 1 дн. назад; высокая активность"
+  },
+  {
+    "id": "26d4",
+    "company_id": "co_ао_энергоснаб",
+    "company_name": "АО ЭнергоСнаб",
+    "inn": null,
+    "event_type": "new_procurement",
+    "event_description": "АО ЭнергоСнаб: new_procurement",
+    "weight": 7.0,
+    "potential_revenue": 180000000,
+    "detected_at": "2026-07-14T01:00:16.724725+00:00",
+    "recommended_products": [
+      "bank_guarantee",
+      "lending"
+    ],
+    "source": "kontur_zakupki",
+    "rationale": "закупка, 180М ₽; 1 дн. назад; высокая активность"
+  },
+  {
+    "id": "dd79",
+    "company_id": "co_пао_сбербанк",
+    "company_name": "ПАО Сбербанк",
+    "inn": null,
+    "event_type": "capital_change",
+    "event_description": "ПАО Сбербанк: capital_change",
+    "weight": 6.0,
+    "potential_revenue": 1000000000,
+    "detected_at": "2026-07-13T16:00:16.724621+00:00",
+    "recommended_products": [
+      "lending",
+      "rko"
+    ],
+    "source": "e_disclosure",
+    "rationale": "изменение капитала, 1МР ₽; 2 дн. назад; умеренная активность"
+  },
+  {
+    "id": "4744",
+    "company_id": "co_пао_норникель",
+    "company_name": "ПАО Норникель",
+    "inn": null,
+    "event_type": "capital_change",
+    "event_description": "ПАО Норникель: capital_change",
+    "weight": 6.0,
+    "potential_revenue": 1000000000,
+    "detected_at": "2026-07-12T17:00:16.724621+00:00",
+    "recommended_products": [
+      "lending",
+      "rko"
+    ],
+    "source": "e_disclosure",
+    "rationale": "изменение капитала, 1МР ₽; 3 дн. назад; умеренная активность"
+  },
+  {
+    "id": "ad5f",
+    "company_id": "co_ооо_промтехносервис",
+    "company_name": "ООО ПромТехноСервис",
+    "inn": null,
+    "event_type": "new_procurement",
+    "event_description": "ООО ПромТехноСервис: new_procurement",
+    "weight": 6.0,
+    "potential_revenue": 180000000,
+    "detected_at": "2026-07-13T16:00:16.724725+00:00",
+    "recommended_products": [
+      "bank_guarantee",
+      "lending"
+    ],
+    "source": "kontur_zakupki",
+    "rationale": "закупка, 180М ₽; 2 дн. назад; высокая активность"
+  },
+  {
+    "id": "1348",
+    "company_id": "co_ооо_альфа_логистика",
+    "company_name": "ООО Альфа-Логистика",
+    "inn": null,
+    "event_type": "new_procurement",
+    "event_description": "ООО Альфа-Логистика: new_procurement",
+    "weight": 5.0,
+    "potential_revenue": 78000000,
+    "detected_at": "2026-07-12T20:00:16.724155+00:00",
+    "recommended_products": [
+      "bank_guarantee",
+      "lending"
+    ],
+    "source": "zakupki",
+    "rationale": "закупка, 78М ₽; 3 дн. назад; высокая активность"
+  },
+  {
+    "id": "a03f",
+    "company_id": "co_ао__росхолдинг_",
+    "company_name": "АО \"РосХолдинг\"",
+    "inn": null,
+    "event_type": "capital_change",
+    "event_description": "АО \"РосХолдинг\": capital_change",
+    "weight": 5.0,
+    "potential_revenue": 100000000,
+    "detected_at": "2026-07-13T06:00:24.507870+00:00",
+    "recommended_products": [
+      "lending",
+      "rko"
+    ],
+    "source": "egrul_changes",
+    "rationale": "изменение капитала, 100М ₽; 2 дн. назад; умеренная активность"
+  },
+  {
+    "id": "b496",
+    "company_id": "co_ао__кубаньлогистик_",
+    "company_name": "АО \"КубаньЛогистик\"",
+    "inn": null,
+    "event_type": "capital_change",
+    "event_description": "АО \"КубаньЛогистик\": capital_change",
+    "weight": 5.0,
+    "potential_revenue": 100000000,
+    "detected_at": "2026-07-12T00:00:24.507870+00:00",
+    "recommended_products": [
+      "lending",
+      "rko"
+    ],
+    "source": "egrul_changes",
+    "rationale": "изменение капитала, 100М ₽; 3 дн. назад; умеренная активность"
+  },
+  {
+    "id": "3720",
+    "company_id": "co_ооо__сбертехнологии_",
+    "company_name": "ООО \"СберТехнологии\"",
+    "inn": null,
+    "event_type": "capital_change",
+    "event_description": "ООО \"СберТехнологии\": capital_change",
+    "weight": 5.0,
+    "potential_revenue": 100000000,
+    "detected_at": "2026-07-13T23:00:24.507870+00:00",
+    "recommended_products": [
+      "lending",
+      "rko"
+    ],
+    "source": "egrul_changes",
+    "rationale": "изменение капитала, 100М ₽; 1 дн. назад; умеренная активность"
+  },
+  {
+    "id": "ccf8",
+    "company_id": "co_ооо_невастройсервис",
+    "company_name": "ООО НеваСтройСервис",
+    "inn": null,
+    "event_type": "new_procurement",
+    "event_description": "ООО НеваСтройСервис: new_procurement",
+    "weight": 4.0,
+    "potential_revenue": 12500000,
+    "detected_at": "2026-07-13T12:00:16.724155+00:00",
+    "recommended_products": [
+      "bank_guarantee",
+      "lending"
+    ],
+    "source": "zakupki",
+    "rationale": "закупка, 12М ₽; 2 дн. назад; высокая активность"
+  },
+  {
+    "id": "cfc8",
+    "company_id": "co_ооо_ит_решения",
+    "company_name": "ООО ИТ-Решения",
+    "inn": null,
+    "event_type": "new_procurement",
+    "event_description": "ООО ИТ-Решения: new_procurement",
+    "weight": 4.0,
+    "potential_revenue": 12000000,
+    "detected_at": "2026-07-12T20:00:16.724725+00:00",
+    "recommended_products": [
+      "bank_guarantee",
+      "lending"
+    ],
+    "source": "kontur_zakupki",
+    "rationale": "закупка, 12М ₽; 3 дн. назад; высокая активность"
+  },
+  {
+    "id": "8cfc",
+    "company_id": "co_пао_телекомгрупп",
+    "company_name": "ПАО ТелеКомГрупп",
+    "inn": null,
+    "event_type": "new_procurement",
+    "event_description": "ПАО ТелеКомГрупп: new_procurement",
+    "weight": 4.0,
+    "potential_revenue": 45000000,
+    "detected_at": "2026-07-12T02:00:16.724725+00:00",
+    "recommended_products": [
+      "bank_guarantee",
+      "lending"
+    ],
+    "source": "kontur_zakupki",
+    "rationale": "закупка, 45М ₽; 3 дн. назад; высокая активность"
+  },
+  {
+    "id": "bc2a",
+    "company_id": "co_ооо_дорстроймонтаж",
+    "company_name": "ООО ДорСтройМонтаж",
+    "inn": null,
+    "event_type": "new_procurement",
+    "event_description": "ООО ДорСтройМонтаж: new_procurement",
+    "weight": 4.0,
+    "potential_revenue": 45000000,
+    "detected_at": "2026-07-14T20:00:16.724725+00:00",
+    "recommended_products": [
+      "bank_guarantee",
+      "lending"
+    ],
+    "source": "kontur_zakupki",
+    "rationale": "закупка, 45М ₽; 1 дн. назад; высокая активность"
+  },
+  {
+    "id": "2e64",
+    "company_id": "co_ооо_агрохолдинг",
+    "company_name": "ООО АгроХолдинг",
+    "inn": null,
+    "event_type": "new_procurement",
+    "event_description": "ООО АгроХолдинг: new_procurement",
+    "weight": 4.0,
+    "potential_revenue": 45000000,
+    "detected_at": "2026-07-14T00:00:16.724725+00:00",
+    "recommended_products": [
+      "bank_guarantee",
+      "lending"
+    ],
+    "source": "kontur_zakupki",
+    "rationale": "закупка, 45М ₽; 1 дн. назад; высокая активность"
+  },
+  {
+    "id": "7ef9",
+    "company_id": "co_ао__сберэнерго_",
+    "company_name": "АО \"СберЭнерго\"",
+    "inn": null,
+    "event_type": "capital_change",
+    "event_description": "АО \"СберЭнерго\": capital_change",
+    "weight": 4.0,
+    "potential_revenue": 100000000,
+    "detected_at": "2026-07-10T05:00:24.507870+00:00",
+    "recommended_products": [
+      "lending",
+      "rko"
+    ],
+    "source": "egrul_changes",
+    "rationale": "изменение капитала, 100М ₽; 5 дн. назад; умеренная активность"
+  },
+  {
+    "id": "191b",
+    "company_id": "co_ооо__трансэнерго_",
+    "company_name": "ООО \"ТрансЭнерго\"",
+    "inn": null,
+    "event_type": "capital_change",
+    "event_description": "ООО \"ТрансЭнерго\": capital_change",
+    "weight": 3.0,
+    "potential_revenue": 25000000,
+    "detected_at": "2026-07-12T19:00:24.507870+00:00",
+    "recommended_products": [
+      "lending",
+      "rko"
+    ],
+    "source": "egrul_changes",
+    "rationale": "изменение капитала, 25М ₽; 3 дн. назад; умеренная активность"
+  },
+  {
+    "id": "9a3f",
+    "company_id": "co_ооо_инвест_групп",
+    "company_name": "ООО Инвест-Групп",
+    "inn": null,
+    "event_type": "new_procurement",
+    "event_description": "ООО Инвест-Групп: new_procurement",
+    "weight": 2.0,
+    "potential_revenue": 5000000,
+    "detected_at": "2026-07-13T01:00:16.724155+00:00",
+    "recommended_products": [
+      "bank_guarantee",
+      "lending"
+    ],
+    "source": "zakupki",
+    "rationale": "закупка, 5М ₽; 2 дн. назад; высокая активность"
+  },
+  {
+    "id": "a230",
+    "company_id": "co_ао_технопром",
+    "company_name": "АО ТехноПром",
+    "inn": null,
+    "event_type": "new_procurement",
+    "event_description": "АО ТехноПром: new_procurement",
+    "weight": 2.0,
+    "potential_revenue": 3500000,
+    "detected_at": "2026-07-14T05:00:16.724155+00:00",
+    "recommended_products": [
+      "bank_guarantee",
+      "lending"
+    ],
+    "source": "zakupki",
+    "rationale": "закупка, 4М ₽; 1 дн. назад; высокая активность"
+  },
+  {
+    "id": "bb75",
+    "company_id": "co_ао_кубаньнефть",
+    "company_name": "АО КубаньНефть",
+    "inn": null,
+    "event_type": "capital_change",
+    "event_description": "АО КубаньНефть: capital_change",
+    "weight": 2.0,
+    "potential_revenue": 10000000,
+    "detected_at": "2026-07-13T17:00:16.724483+00:00",
+    "recommended_products": [
+      "lending",
+      "rko"
+    ],
+    "source": "fedresurs",
+    "rationale": "изменение капитала, 10М ₽; 2 дн. назад; умеренная активность"
+  },
+  {
+    "id": "4dcb",
+    "company_id": "co_пао_татнефть",
+    "company_name": "ПАО Татнефть",
+    "inn": null,
+    "event_type": "capital_change",
+    "event_description": "ПАО Татнефть: capital_change",
+    "weight": 2.0,
+    "potential_revenue": 10000000,
+    "detected_at": "2026-07-11T01:00:16.724621+00:00",
+    "recommended_products": [
+      "lending",
+      "rko"
+    ],
+    "source": "e_disclosure",
+    "rationale": "изменение капитала, 10М ₽; 4 дн. назад; умеренная активность"
+  },
+  {
+    "id": "ffa9",
+    "company_id": "co_пао_аэрофлот",
+    "company_name": "ПАО Аэрофлот",
+    "inn": null,
+    "event_type": "capital_change",
+    "event_description": "ПАО Аэрофлот: capital_change",
+    "weight": 2.0,
+    "potential_revenue": 10000000,
+    "detected_at": "2026-07-14T14:00:16.724621+00:00",
+    "recommended_products": [
+      "lending",
+      "rko"
+    ],
+    "source": "e_disclosure",
+    "rationale": "изменение капитала, 10М ₽; 1 дн. назад; умеренная активность"
+  },
+  {
+    "id": "6836",
+    "company_id": "co_ооо_строймастер",
+    "company_name": "ООО СтройМастер",
+    "inn": null,
+    "event_type": "new_procurement",
+    "event_description": "ООО СтройМастер: new_procurement",
+    "weight": 2.0,
+    "potential_revenue": 6000000,
+    "detected_at": "2026-07-14T00:00:16.724725+00:00",
+    "recommended_products": [
+      "bank_guarantee",
+      "lending"
+    ],
+    "source": "kontur_zakupki",
+    "rationale": "закупка, 6М ₽; 1 дн. назад; высокая активность"
+  },
+  {
+    "id": "619a",
+    "company_id": "co_зао_инвест_капитал",
+    "company_name": "ЗАО Инвест-Капитал",
+    "inn": null,
+    "event_type": "capital_change",
+    "event_description": "ЗАО Инвест-Капитал: capital_change",
+    "weight": 2.0,
+    "potential_revenue": 10000000,
+    "detected_at": "2026-07-12T16:00:24.508339+00:00",
+    "recommended_products": [
+      "lending",
+      "rko"
+    ],
+    "source": "fns",
+    "rationale": "изменение капитала, 10М ₽; 3 дн. назад; умеренная активность"
+  },
+  {
+    "id": "e563",
+    "company_id": "co_ао_технолайн",
+    "company_name": "АО ТехноЛайн",
+    "inn": null,
+    "event_type": "court_case",
+    "event_description": "АО ТехноЛайн: court_case",
+    "weight": 1.0,
+    "potential_revenue": 12000000,
+    "detected_at": "2026-07-12T14:00:16.724382+00:00",
+    "recommended_products": [],
+    "source": "kad_arbitr",
+    "rationale": "судебное дело, 12М ₽; 3 дн. назад; риск/спад"
+  },
+  {
+    "id": "ea9a",
+    "company_id": "co_ооо_волгатрейд",
+    "company_name": "ООО ВолгаТрейд",
+    "inn": null,
+    "event_type": "court_case",
+    "event_description": "ООО ВолгаТрейд: court_case",
+    "weight": 1.0,
+    "potential_revenue": 50000000,
+    "detected_at": "2026-07-14T06:00:16.724382+00:00",
+    "recommended_products": [],
+    "source": "kad_arbitr",
+    "rationale": "судебное дело, 50М ₽; 1 дн. назад; риск/спад"
+  },
+  {
+    "id": "b2a4",
+    "company_id": "co_ооо_технологистик",
+    "company_name": "ООО ТехноЛогистик",
+    "inn": null,
+    "event_type": "capital_change",
+    "event_description": "ООО ТехноЛогистик: capital_change",
+    "weight": 1.0,
+    "potential_revenue": 5000000,
+    "detected_at": "2026-07-09T12:00:16.724483+00:00",
+    "recommended_products": [
+      "lending",
+      "rko"
+    ],
+    "source": "fedresurs",
+    "rationale": "изменение капитала, 5М ₽; 6 дн. назад; умеренная активность"
+  },
+  {
+    "id": "f438",
+    "company_id": "co_неизвестная_компания",
+    "company_name": "Неизвестная компания",
+    "inn": null,
+    "event_type": "news_mention",
+    "event_description": "Неизвестная компания: news_mention",
+    "weight": 1.0,
+    "potential_revenue": 0,
+    "detected_at": "Wed, 15 Jul 2026 19:07:00 +0300",
+    "recommended_products": [
+      "lending",
+      "rko"
+    ],
+    "source": "news_rss",
+    "rationale": "упоминание в СМИ; сегодня; умеренная активность"
+  },
+  {
+    "id": "3e48",
+    "company_id": "co_неизвестная_компания",
+    "company_name": "Неизвестная компания",
+    "inn": null,
+    "event_type": "ipo_announcement",
+    "event_description": "Неизвестная компания: ipo_announcement",
+    "weight": 1.0,
+    "potential_revenue": 0,
+    "detected_at": "Wed, 15 Jul 2026 16:17:00 +0300",
+    "recommended_products": [
+      "lending",
+      "rko",
+      "ved"
+    ],
+    "source": "news_rss",
+    "rationale": "IPO; сегодня; высокая активность"
+  },
+  {
+    "id": "14ad",
+    "company_id": "co_неизвестная_компания",
+    "company_name": "Неизвестная компания",
+    "inn": null,
+    "event_type": "investment",
+    "event_description": "Неизвестная компания: investment",
+    "weight": 1.0,
+    "potential_revenue": 0,
+    "detected_at": "Wed, 15 Jul 2026 16:04:11 +0300",
+    "recommended_products": [
+      "lending",
+      "rko"
+    ],
+    "source": "news_rss",
+    "rationale": "инвестиции; сегодня; высокая активность"
+  },
+  {
+    "id": "3ca5",
+    "company_id": "co_неизвестная_компания",
+    "company_name": "Неизвестная компания",
+    "inn": null,
+    "event_type": "contract_signed",
+    "event_description": "Неизвестная компания: contract_signed",
+    "weight": 1.0,
+    "potential_revenue": 0,
+    "detected_at": "Wed, 15 Jul 2026 21:11:00 +0300",
+    "recommended_products": [
+      "bank_guarantee",
+      "lending"
+    ],
+    "source": "news_rss",
+    "rationale": "контракт; сегодня; высокая активность"
+  },
+  {
+    "id": "d8b8",
+    "company_id": "co_неизвестная_компания",
+    "company_name": "Неизвестная компания",
+    "inn": null,
+    "event_type": "merger_acquisition",
+    "event_description": "Неизвестная компания: merger_acquisition",
+    "weight": 1.0,
+    "potential_revenue": 0,
+    "detected_at": "Wed, 15 Jul 2026 09:48:22 +0300",
+    "recommended_products": [
+      "lending",
+      "rko",
+      "ved"
+    ],
+    "source": "news_rss",
+    "rationale": "слияние/поглощение; сегодня; высокая активность"
+  },
+  {
+    "id": "e4a6",
+    "company_id": "co_газпром",
+    "company_name": "Газпром",
+    "inn": null,
+    "event_type": "ipo_announcement",
+    "event_description": "Газпром: ipo_announcement",
+    "weight": 1.0,
+    "potential_revenue": 0,
+    "detected_at": "Wed, 15 Jul 2026 09:04:07 +0300",
+    "recommended_products": [
+      "lending",
+      "rko",
+      "ved"
+    ],
+    "source": "news_rss",
+    "rationale": "IPO; сегодня; высокая активность"
+  },
+  {
+    "id": "c9ac",
+    "company_id": "co_неизвестная_компания",
+    "company_name": "Неизвестная компания",
+    "inn": null,
+    "event_type": "new_procurement",
+    "event_description": "Неизвестная компания: new_procurement",
+    "weight": 1.0,
+    "potential_revenue": 0,
+    "detected_at": "Tue, 14 Jul 2026 19:54:29 +0300",
+    "recommended_products": [
+      "bank_guarantee",
+      "lending"
+    ],
+    "source": "news_rss",
+    "rationale": "закупка; сегодня; высокая активность"
+  },
+  {
+    "id": "c030",
+    "company_id": "co_ооо__стройдевелопмент_",
+    "company_name": "ООО \"СтройДевелопмент\"",
+    "inn": null,
+    "event_type": "new_registration",
+    "event_description": "ООО \"СтройДевелопмент\": new_registration",
+    "weight": 1.0,
+    "potential_revenue": 1000000,
+    "detected_at": "2026-07-09T23:00:24.507870+00:00",
+    "recommended_products": [
+      "rko"
+    ],
+    "source": "egrul_changes",
+    "rationale": "новая компания, 1М ₽; 5 дн. назад; слабый сигнал"
+  },
+  {
+    "id": "b7da",
+    "company_id": "co_пао__глобалстрой_",
+    "company_name": "ПАО \"ГлобалСтрой\"",
+    "inn": null,
+    "event_type": "capital_change",
+    "event_description": "ПАО \"ГлобалСтрой\": capital_change",
+    "weight": 1.0,
+    "potential_revenue": 1000000,
+    "detected_at": "2026-07-11T16:00:24.507870+00:00",
+    "recommended_products": [
+      "lending",
+      "rko"
+    ],
+    "source": "egrul_changes",
+    "rationale": "изменение капитала, 1М ₽; 4 дн. назад; умеренная активность"
+  },
+  {
+    "id": "346e",
+    "company_id": "co_пао__уралгрупп_",
+    "company_name": "ПАО \"УралГрупп\"",
+    "inn": null,
+    "event_type": "new_registration",
+    "event_description": "ПАО \"УралГрупп\": new_registration",
+    "weight": 1.0,
+    "potential_revenue": 1000000,
+    "detected_at": "2026-07-13T12:00:24.507870+00:00",
+    "recommended_products": [
+      "rko"
+    ],
+    "source": "egrul_changes",
+    "rationale": "новая компания, 1М ₽; 2 дн. назад; слабый сигнал"
+  },
+  {
+    "id": "1ffb",
+    "company_id": "co_ооо__трансгрупп_",
+    "company_name": "ООО \"ТрансГрупп\"",
+    "inn": null,
+    "event_type": "capital_change",
+    "event_description": "ООО \"ТрансГрупп\": capital_change",
+    "weight": 1.0,
+    "potential_revenue": 1000000,
+    "detected_at": "2026-07-13T11:00:24.507870+00:00",
+    "recommended_products": [
+      "lending",
+      "rko"
+    ],
+    "source": "egrul_changes",
+    "rationale": "изменение капитала, 1М ₽; 2 дн. назад; умеренная активность"
+  },
+  {
+    "id": "9f58",
+    "company_id": "co_ооо__трансальянс_",
+    "company_name": "ООО \"ТрансАльянс\"",
+    "inn": null,
+    "event_type": "new_registration",
+    "event_description": "ООО \"ТрансАльянс\": new_registration",
+    "weight": 1.0,
+    "potential_revenue": 1000000,
+    "detected_at": "2026-07-11T23:00:24.507870+00:00",
+    "recommended_products": [
+      "rko"
+    ],
+    "source": "egrul_changes",
+    "rationale": "новая компания, 1М ₽; 3 дн. назад; слабый сигнал"
+  },
+  {
+    "id": "b648",
+    "company_id": "co_ооо__гаммаэнерго_",
+    "company_name": "ООО \"ГаммаЭнерго\"",
+    "inn": null,
+    "event_type": "new_registration",
+    "event_description": "ООО \"ГаммаЭнерго\": new_registration",
+    "weight": 1.0,
+    "potential_revenue": 5000000,
+    "detected_at": "2026-07-15T05:00:24.508118+00:00",
+    "recommended_products": [
+      "rko"
+    ],
+    "source": "egrul",
+    "rationale": "новая компания, 5М ₽; 0 дн. назад; слабый сигнал"
+  },
+  {
+    "id": "86d8",
+    "company_id": "co_ооо__уралстрой_",
+    "company_name": "ООО \"УралСтрой\"",
+    "inn": null,
+    "event_type": "new_registration",
+    "event_description": "ООО \"УралСтрой\": new_registration",
+    "weight": 1.0,
+    "potential_revenue": 5000000,
+    "detected_at": "2026-07-13T20:00:24.508118+00:00",
+    "recommended_products": [
+      "rko"
+    ],
+    "source": "egrul",
+    "rationale": "новая компания, 5М ₽; 2 дн. назад; слабый сигнал"
+  },
+  {
+    "id": "cdd9",
+    "company_id": "co_ао__уралхолдинг_",
+    "company_name": "АО \"УралХолдинг\"",
+    "inn": null,
+    "event_type": "new_registration",
+    "event_description": "АО \"УралХолдинг\": new_registration",
+    "weight": 1.0,
+    "potential_revenue": 1000000,
+    "detected_at": "2026-07-14T03:00:24.508118+00:00",
+    "recommended_products": [
+      "rko"
+    ],
+    "source": "egrul",
+    "rationale": "новая компания, 1М ₽; 1 дн. назад; слабый сигнал"
+  },
+  {
+    "id": "01be",
+    "company_id": "co_ооо__омегатрейд_",
+    "company_name": "ООО \"ОмегаТрейд\"",
+    "inn": null,
+    "event_type": "new_registration",
+    "event_description": "ООО \"ОмегаТрейд\": new_registration",
+    "weight": 1.0,
+    "potential_revenue": 1000000,
+    "detected_at": "2026-07-12T21:00:24.508118+00:00",
+    "recommended_products": [
+      "rko"
+    ],
+    "source": "egrul",
+    "rationale": "новая компания, 1М ₽; 2 дн. назад; слабый сигнал"
+  },
+  {
+    "id": "8ea3",
+    "company_id": "co_зао__неологистик_",
+    "company_name": "ЗАО \"НеоЛогистик\"",
+    "inn": null,
+    "event_type": "new_registration",
+    "event_description": "ЗАО \"НеоЛогистик\": new_registration",
+    "weight": 1.0,
+    "potential_revenue": 5000000,
+    "detected_at": "2026-07-13T00:00:24.508118+00:00",
+    "recommended_products": [
+      "rko"
+    ],
+    "source": "egrul",
+    "rationale": "новая компания, 5М ₽; 2 дн. назад; слабый сигнал"
+  },
+  {
+    "id": "b320",
+    "company_id": "co_зао__гаммадевелопмент_",
+    "company_name": "ЗАО \"ГаммаДевелопмент\"",
+    "inn": null,
+    "event_type": "new_registration",
+    "event_description": "ЗАО \"ГаммаДевелопмент\": new_registration",
+    "weight": 1.0,
+    "potential_revenue": 5000000,
+    "detected_at": "2026-07-14T03:00:24.508118+00:00",
+    "recommended_products": [
+      "rko"
+    ],
+    "source": "egrul",
+    "rationale": "новая компания, 5М ₽; 1 дн. назад; слабый сигнал"
+  },
+  {
+    "id": "7ede",
+    "company_id": "co_ао_промстрой",
+    "company_name": "АО ПромСтрой",
+    "inn": null,
+    "event_type": "capital_change",
+    "event_description": "АО ПромСтрой: capital_change",
+    "weight": 1.0,
+    "potential_revenue": 5000000,
+    "detected_at": "2026-07-14T04:00:24.508339+00:00",
+    "recommended_products": [
+      "lending",
+      "rko"
+    ],
+    "source": "fns",
+    "rationale": "изменение капитала, 5М ₽; 1 дн. назад; умеренная активность"
+  },
+  {
+    "id": "732f",
+    "company_id": "co_ао_датацентр",
+    "company_name": "АО ДатаЦентр",
+    "inn": null,
+    "event_type": "hiring_surge",
+    "event_description": "АО ДатаЦентр: hiring_surge",
+    "weight": 1.0,
+    "potential_revenue": 0,
+    "detected_at": "2026-07-14T00:00:24.508490+00:00",
+    "recommended_products": [
+      "salary_project",
+      "lending"
+    ],
+    "source": "hh",
+    "rationale": "рост найма; 1 дн. назад; умеренная активность"
+  },
+  {
+    "id": "8c1e",
+    "company_id": "co_ооо_биолаб",
+    "company_name": "ООО БиоЛаб",
+    "inn": null,
+    "event_type": "hiring_surge",
+    "event_description": "ООО БиоЛаб: hiring_surge",
+    "weight": 1.0,
+    "potential_revenue": 0,
+    "detected_at": "2026-07-13T19:00:24.508490+00:00",
+    "recommended_products": [
+      "salary_project",
+      "lending"
+    ],
+    "source": "hh",
+    "rationale": "рост найма; 2 дн. назад; умеренная активность"
+  },
+  {
+    "id": "0d9f",
+    "company_id": "co_ооо_контракт_лоджистик",
+    "company_name": "ООО Контракт-Лоджистик",
+    "inn": null,
+    "event_type": "hiring_surge",
+    "event_description": "ООО Контракт-Лоджистик: hiring_surge",
+    "weight": 1.0,
+    "potential_revenue": 0,
+    "detected_at": "2026-07-15T00:00:24.508490+00:00",
+    "recommended_products": [
+      "salary_project",
+      "lending"
+    ],
+    "source": "hh",
+    "rationale": "рост найма; 0 дн. назад; высокая активность"
+  },
+  {
+    "id": "bf9a",
+    "company_id": "co_ооо_техностарт",
+    "company_name": "ООО ТехноСтарт",
+    "inn": null,
+    "event_type": "hiring_surge",
+    "event_description": "ООО ТехноСтарт: hiring_surge",
+    "weight": 1.0,
+    "potential_revenue": 0,
+    "detected_at": "2026-07-13T03:00:24.508490+00:00",
+    "recommended_products": [
+      "salary_project",
+      "lending"
+    ],
+    "source": "hh",
+    "rationale": "рост найма; 2 дн. назад; умеренная активность"
+  },
+  {
+    "id": "5b6f",
+    "company_id": "co_пао_финсервис",
+    "company_name": "ПАО ФинСервис",
+    "inn": null,
+    "event_type": "hiring_surge",
+    "event_description": "ПАО ФинСервис: hiring_surge",
+    "weight": 1.0,
+    "potential_revenue": 0,
+    "detected_at": "2026-07-14T08:00:24.508490+00:00",
+    "recommended_products": [
+      "salary_project",
+      "lending"
+    ],
+    "source": "hh",
+    "rationale": "рост найма; 1 дн. назад; умеренная активность"
+  }
+]

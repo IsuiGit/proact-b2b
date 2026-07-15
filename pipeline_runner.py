@@ -98,7 +98,8 @@ def main() -> None:
         with open(scout_path, "w", encoding="utf-8") as f:
             json.dump(scout_json, f, ensure_ascii=False, indent=2)
         print(f"SMART_SCOUT_DONE:{scout_path}")
-        print("SMART_LLM_STAGES:analyst,brief,warmup")
+        print("SMART_LLM_STAGES:scout,analyst,brief,warmup")
+        print("SMART_SCOUT_REFINE:needed")
         print("SMART_TRACKER_PENDING:run --stage tracker after LLM stages complete")
         return
 
