@@ -273,14 +273,17 @@ def _load_profiles(input_json_path: str | None = None) -> list[dict]:
     return []
 
 
-def _filter_100_percent(profiles: list[dict]) -> list[dict]:
-    """Keep only profiles with at least one product at score >= 1.0."""
+WARMUP_THRESHOLD = 0.9  # 90% confidence — lowered from 1.0 (was 100% gate)
+
+
+def _filter_qualified(profiles: list[dict], threshold: float = WARMUP_THRESHOLD) -> list[dict]:
+    """Keep only profiles with at least one product at score >= threshold (default 0.9 = 90%)."""
     result = []
     for p in profiles:
         heatmap = p.get("product_heatmap", [])
-        top_products = [pr for pr in heatmap if pr.get("score", 0) >= 1.0]
+        top_products = [pr for pr in heatmap if pr.get("score", 0) >= threshold]
         if top_products:
-            p["_top_products_100"] = top_products
+            p["_top_products_qualified"] = top_products
             result.append(p)
     return result
 
@@ -349,13 +352,15 @@ def run(
     scout_store: str | None = None,
     top_n: int = 50,
     fmt: str = "text",
+    threshold: float = WARMUP_THRESHOLD,
 ) -> str:
     """Main WARMUP entry point."""
     profiles = _load_profiles(input_json)
-    qualified = _filter_100_percent(profiles)
+    qualified = _filter_qualified(profiles, threshold=threshold)
 
     if not qualified:
-        return "WARMUP: нет компаний с уверенностью 100% — пропуск шага."
+        pct = int(threshold * 100)
+        return f"WARMUP: нет компаний с уверенностью ≥{pct}% — пропуск шага."
 
     scout_hints = _load_scout_hints(scout_store)
     limited = qualified[:top_n]
@@ -364,18 +369,18 @@ def run(
         out_profiles = []
         for p in limited:
             company = p["company_name"]
-            top = p["_top_products_100"][0]
+            top = p["_top_products_qualified"][0]
             product_key = top["product"]
             product_ru = PRODUCT_RU.get(product_key, product_key)
             strategy = p.get("entry_scenario", {}).get("approach", "nurture")
             # Try exact match first, then normalized
-        hint = scout_hints.get(company, {})
-        if not hint:
-            norm = _normalize_company_key(company)
-            for scout_name, scout_hint in scout_hints.items():
-                if _normalize_company_key(scout_name) == norm:
-                    hint = scout_hint
-                    break
+            hint = scout_hints.get(company, {})
+            if not hint:
+                norm = _normalize_company_key(company)
+                for scout_name, scout_hint in scout_hints.items():
+                    if _normalize_company_key(scout_name) == norm:
+                        hint = scout_hint
+                        break
             letter = _build_letter(
                 company=company,
                 product_key=product_key,
@@ -388,10 +393,10 @@ def run(
             out_profiles.append({
                 "company_name": company,
                 "company_id": p.get("company_id"),
-                "top_products_100pc": [
+                "top_products_qualified": [
                     {"product": pr["product"], "product_ru": PRODUCT_RU.get(pr["product"], pr["product"]),
                      "score": pr["score"], "estimated_revenue": pr.get("estimated_revenue")}
-                    for pr in p["_top_products_100"]
+                    for pr in p["_top_products_qualified"]
                 ],
                 "strategy": strategy,
                 "letter": letter,
@@ -399,15 +404,16 @@ def run(
         return json.dumps({"count": len(out_profiles), "warmup_templates": out_profiles}, ensure_ascii=False, indent=2)
 
     # Text/Markdown output
+    pct = int(threshold * 100)
     lines = []
-    lines.append(f"## WARMUP — письма прогрева ({len(limited)} компаний с уверенностью 100%)")
+    lines.append(f"## WARMUP — письма прогрева ({len(limited)} компаний с уверенностью ≥{pct}%)")
     lines.append("")
     lines.append("| # | Компания | Продукт | Уверенность | Стратегия | Срочность |")
     lines.append("|---|----------|---------|-------------|-----------|-----------|")
 
     for i, p in enumerate(limited, 1):
         company = p["company_name"]
-        top_p = p["_top_products_100"][0]
+        top_p = p["_top_products_qualified"][0]
         product_ru = PRODUCT_RU.get(top_p["product"], top_p["product"])
         strategy = p.get("entry_scenario", {}).get("approach", "nurture")
         meta = STRATEGY_META.get(strategy, STRATEGY_META["nurture"])
@@ -420,7 +426,7 @@ def run(
     # Render individual letters
     for p in limited:
         company = p["company_name"]
-        top_p = p["_top_products_100"][0]
+        top_p = p["_top_products_qualified"][0]
         product_key = top_p["product"]
         product_ru = PRODUCT_RU.get(product_key, product_key)
         strategy = p.get("entry_scenario", {}).get("approach", "nurture")
@@ -460,6 +466,8 @@ if __name__ == "__main__":
     parser.add_argument("--scout-store", type=str, default=None, help="pipeline_store.json for event hints")
     parser.add_argument("--top-n", type=int, default=50, help="max letters")
     parser.add_argument("--format", choices=["text", "json"], default="text")
+    parser.add_argument("--threshold", type=float, default=WARMUP_THRESHOLD,
+                        help=f"confidence threshold (default {WARMUP_THRESHOLD} = {int(WARMUP_THRESHOLD*100)}%)")
     args = parser.parse_args()
 
     result = run(
@@ -467,5 +475,6 @@ if __name__ == "__main__":
         scout_store=args.scout_store,
         top_n=args.top_n,
         fmt=args.format,
+        threshold=args.threshold,
     )
     print(result)

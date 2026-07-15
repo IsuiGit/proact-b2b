@@ -36,6 +36,7 @@ from analyst_pipeline import run_analyst
 from warmup_pipeline import run as warmup_run
 from brief_pipeline import run_brief
 from tracker_pipeline import run as tracker_run, record_contact, should_warmup, format_funnel
+from feedback_pipeline import list_feedback as fb_list, compute_stats as fb_stats
 
 
 def main() -> None:
@@ -50,6 +51,12 @@ def main() -> None:
     parser.add_argument("--brief", type=str, default=None, help="company name/INN for BRIEF report")
     parser.add_argument("--result", nargs=2, metavar=("COMPANY", "STATUS"),
                         help="Record contact result: <company> <status>")
+    parser.add_argument("--feedback-stats", action="store_true", help="show feedback stats after run")
+    parser.add_argument("--feedback-list", action="store_true", help="show all feedback entries")
+    parser.add_argument("--feedback-record", nargs=3, metavar=("COMPANY", "PRODUCT", "OUTCOME"),
+                        help="Record feedback: <company> <product> <outcome>")
+    parser.add_argument("--threshold", type=float, default=0.9,
+                        help="WARMUP confidence threshold (default 0.9 = 90%%)")
     args = parser.parse_args()
 
     # ── Handle --result (record contact and exit) ─────────────────
@@ -57,6 +64,14 @@ def main() -> None:
         company, status = args.result
         record_contact(company, status)
         print(f"✅ Contact recorded: {company} → {status}")
+        return
+
+    # ── Handle --feedback-record (record feedback and exit) ───────
+    if args.feedback_record:
+        company, product, outcome = args.feedback_record
+        from feedback_pipeline import record_feedback as fb_store
+        entry = fb_store(company=company, product=product, outcome=outcome)
+        print(f"✅ Feedback #{entry['id']} recorded: {entry['company']} / {entry['product']} — \"{entry['outcome']}\"")
         return
 
     # ── Step 1: SCOUT ──────────────────────────────────────────────
@@ -106,11 +121,11 @@ def main() -> None:
     # ── Step 3: WARMUP (only 100%-confidence companies) ───────────
     warmup_result = None
     
-    # Extract ALL warmup-target companies first
+    # Extract ALL warmup-target companies first (90% confidence threshold, matching warmup_pipeline)
     all_warmup_companies = []
     for p in analyst_json.get("profiles", []):
         heatmap = p.get("product_heatmap", [])
-        if any(pr.get("score", 0) >= 1.0 for pr in heatmap):
+        if any(pr.get("score", 0) >= 0.9 for pr in heatmap):
             all_warmup_companies.append(p.get("company_name", ""))
     
     # Filter through tracker (remove already-contacted)
@@ -132,6 +147,7 @@ def main() -> None:
             scout_store=_STORE_FILE,
             top_n=args.top_n,
             fmt=args.format,
+            threshold=args.threshold,
         )
         
         try:
@@ -188,7 +204,7 @@ def main() -> None:
         # Render analyst markdown ourselves from JSON
         analyst_markdown = _analyst_to_markdown(analyst_json.get("profiles", []), args.top_n)
         parts.append(analyst_markdown)
-        if warmup_result and "нет компаний с уверенностью 100%" not in warmup_result:
+        if warmup_result and "нет компаний с уверенностью" not in warmup_result:
             parts.append("")
             parts.append(warmup_result)
         # Auto-BRIEF for WARMUP companies
@@ -222,6 +238,14 @@ def main() -> None:
                 parts.append(funnel)
                 if filtered_out:
                     parts.append(f"\n**Отфильтровано повторных:** {filtered_out} из {len(all_warmup_companies)}")
+        
+        # FEEDBACK section
+        if args.feedback_stats:
+            parts.append("")
+            parts.append(fb_stats())
+        if args.feedback_list:
+            parts.append("")
+            parts.append(fb_list(limit=args.top_n))
         print("\n".join(parts))
 
     # Cleanup temp
