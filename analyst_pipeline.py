@@ -176,12 +176,14 @@ def compute_risk_profile(events: list[dict[str, Any]]) -> dict[str, Any]:
 # ---------------------------------------------------------------------------
 # Product heatmap — revenue-scaled with bank margin estimation
 # ---------------------------------------------------------------------------
-def compute_product_heatmap(events: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def compute_product_heatmap(events: list[dict[str, Any]], adjustments: dict | None = None) -> list[dict[str, Any]]:
     """
     Map events to bank products.
 
     Score = sum(base_score × weight/7 × log(revenue_scale)) per event.
     Also estimates potential_bank_revenue (₽) for prioritization.
+
+    Adjustments override base_score multipliers per product (from feedback learning).
     """
     product_scores: dict[str, float] = {p: 0.0 for p in PRODUCTS}
     product_revenue: dict[str, float] = {p: 0.0 for p in PRODUCTS}
@@ -199,7 +201,15 @@ def compute_product_heatmap(events: list[dict[str, Any]]) -> list[dict[str, Any]
             revenue_scale = 1.0 + 0.5 * math.log10(max(rev / 1_000_000, 1.0))
 
         for product_slug, base, margin_bps in signals:
-            scaled = base * (weight / 7.0) * revenue_scale
+            # Apply feedback adjustment multiplier (default 1.0 = no change)
+            adj_multiplier = 1.0
+            if adjustments and "product_weights" in adjustments:
+                defaults = adjustments.get("_defaults", {})
+                adj_w = adjustments["product_weights"].get(product_slug, 1.0)
+                def_w = defaults.get(product_slug, 1.0)
+                if def_w > 0:
+                    adj_multiplier = adj_w / def_w
+            scaled = base * adj_multiplier * (weight / 7.0) * revenue_scale
             product_scores[product_slug] = min(1.0, product_scores[product_slug] + scaled)
             if rev > 0:
                 product_revenue[product_slug] += rev * (margin_bps / 10_000)
@@ -351,7 +361,7 @@ def _product_name(slug: str) -> str:
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
-def run_analyst(input_path: str, top_n: int, fmt: str) -> str:
+def run_analyst(input_path: str, top_n: int, fmt: str, adjustments: dict | None = None) -> str:
     """Load SCOUT data → analyze → format → return string."""
     if not os.path.isfile(input_path):
         return f"[ANALYST] Input file not found: {input_path}"
@@ -379,7 +389,7 @@ def run_analyst(input_path: str, top_n: int, fmt: str) -> str:
             continue
 
         risk = compute_risk_profile(c_events)
-        heatmap = compute_product_heatmap(c_events)
+        heatmap = compute_product_heatmap(c_events, adjustments=adjustments)
         scenario = compute_entry_scenario(risk, heatmap, c_events)
 
         # Overall score: revenue-scaled signal minus risk penalty, 0-10

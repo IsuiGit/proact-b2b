@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "product_weights": {
+    "rko": 1.0,
+    "lending": 0.85,
+    "bank_guarantee": 1.0,
+    "leasing": 1.0,
+    "salary_project": 1.0,
+    "ved": 1.0,
+    "acquiring": 1.0
+  },
+  "litigation_penalty": 0.3,
+  "warmup_tone": "casual",
+  "history": [
+    {
+      "run_id": "f533276cbeb5",
+      "applied_ids": [
+        1
+      ],
+      "skipped": 0,
+      "timestamp": "2026-07-15T12:23:28.176394+00:00",
+      "product_weights": {
+        "rko": 1.0,
+        "lending": 0.85,
+        "bank_guarantee": 1.0,
+        "leasing": 1.0,
+        "salary_project": 1.0,
+        "ved": 1.0,
+        "acquiring": 1.0
+      },
+      "litigation_penalty": 0.3,
+      "warmup_tone": "casual"
+    }
+  ]
+}
