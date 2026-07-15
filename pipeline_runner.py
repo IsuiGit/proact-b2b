@@ -201,7 +201,16 @@ def main() -> None:
             if any(pr.get("score", 0) >= args.threshold for pr in p.get("product_heatmap", [])):
                 warmup_companies.append(p["company_name"])
 
-    # ── Step 5: Combined output ───────────────────────────────────
+    # ── Step 5: Output — each stage to its own file ──────────────
+    _OUT_DIR = os.path.join(_REPO_ROOT, "data", "task_drive", "pipeline_output")
+    os.makedirs(_OUT_DIR, exist_ok=True)
+
+    def _write_stage(name: str, content: str) -> None:
+        path = os.path.join(_OUT_DIR, f"{name}.md")
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(content)
+        print(f"[{name}] → {path}")
+
     if args.format == "json":
         output = {
             "scout": scout_json if isinstance(scout_json, dict) else {"events": scout_json},
@@ -231,30 +240,24 @@ def main() -> None:
             output["brief"] = briefs
         if tracker_markdown:
             output["tracker_funnel"] = format_funnel()
-        print(json.dumps(output, ensure_ascii=False, indent=2))
+        _write_stage("full", json.dumps(output, ensure_ascii=False, indent=2))
     else:
-        parts = []
+        # SCOUT
+        _write_stage("scout", "## 1️⃣ SCOUT — найденные инфоповоды\n" + scout_result)
 
-        # ── SCOUT ──
-        parts.append("## 1️⃣ SCOUT — найденные инфоповоды")
-        parts.append(scout_result)
-        parts.append("")
+        # ANALYST
+        _write_stage("analyst", "## 2️⃣ ANALYST — профили компаний\n" + analyst_markdown)
 
-        # ── ANALYST ──
-        parts.append("## 2️⃣ ANALYST — профили компаний")
-        parts.append(analyst_markdown)
-        parts.append("")
-
-        # ── WARMUP ──
+        # WARMUP
         if warmup_result and "нет компаний с уверенностью" not in warmup_result:
-            parts.append(warmup_result)
+            _write_stage("warmup", warmup_result)
 
-        # ── BRIEF (полные досье) ──
+        # BRIEF
         brief_targets = list(warmup_companies)
         if args.brief and args.brief not in warmup_companies:
             brief_targets.append(args.brief)
         if brief_targets:
-            parts.append("## 📋 BRIEF — досье по целевым компаниям")
+            brief_parts = ["## 📋 BRIEF — досье по целевым компаниям"]
             for company_name in brief_targets:
                 brief_result = run_brief(
                     company_query=company_name,
@@ -262,24 +265,21 @@ def main() -> None:
                     scout_path=_STORE_FILE,
                     fmt="text",
                 )
-                parts.append(brief_result)
-                parts.append("")
+                brief_parts.append(brief_result)
+                brief_parts.append("")
+            _write_stage("brief", "\n".join(brief_parts))
 
-        # ── TRACKER ──
+        # TRACKER
         if not args.skip_tracker:
             funnel = format_funnel(top_n=args.top_n)
             if funnel:
-                parts.append("## 📊 TRACKER — воронка")
-                parts.append(funnel)
-        
-        # FEEDBACK section
+                _write_stage("tracker", "## 📊 TRACKER — воронка\n" + funnel)
+
+        # FEEDBACK
         if args.feedback_stats:
-            parts.append("")
-            parts.append(fb_stats())
+            _write_stage("feedback_stats", fb_stats())
         if args.feedback_list:
-            parts.append("")
-            parts.append(fb_list(limit=args.top_n))
-        print("\n".join(parts))
+            _write_stage("feedback_list", fb_list(limit=args.top_n))
 
     # Cleanup temp
     try:

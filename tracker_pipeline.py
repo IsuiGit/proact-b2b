@@ -118,7 +118,7 @@ def format_funnel(top_n: int = 50) -> str:
     contacts = store["contacts"]
     
     if not contacts:
-        return "**TRACKER:** история контактов пуста — пока не было контактов.\n"
+        return "Зарегистрированных контактов пока нет\n"
     
     # Группировка по статусам
     by_status = {}
