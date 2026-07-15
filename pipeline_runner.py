@@ -34,6 +34,7 @@ if _DELIVERABLES not in sys.path:
 from scout_pipeline import run as scout_run
 from analyst_pipeline import run_analyst
 from warmup_pipeline import run as warmup_run
+from brief_pipeline import run_brief
 
 
 def main() -> None:
@@ -44,6 +45,7 @@ def main() -> None:
     parser.add_argument("--extra-info", action="store_true", help="include scan summaries")
     parser.add_argument("--dry-run", action="store_true", help="skip store writes")
     parser.add_argument("--skip-warmup", action="store_true", help="skip WARMUP stage")
+    parser.add_argument("--brief", type=str, default=None, help="company name/INN for BRIEF report")
     args = parser.parse_args()
 
     # ── Step 1: SCOUT ──────────────────────────────────────────────
@@ -100,6 +102,14 @@ def main() -> None:
             fmt=args.format,
         )
 
+    # ── Extract WARMUP-target companies for auto-BRIEF ─────────────
+    warmup_companies = []
+    if not args.skip_warmup:
+        for p in analyst_json.get("profiles", []):
+            heatmap = p.get("product_heatmap", [])
+            if any(pr.get("score", 0) >= 1.0 for pr in heatmap):
+                warmup_companies.append(p.get("company_name", ""))
+
     # ── Step 4: Combined output ────────────────────────────────────
     if args.format == "json":
         output = {
@@ -108,6 +118,27 @@ def main() -> None:
         }
         if warmup_result:
             output["warmup"] = json.loads(warmup_result) if isinstance(warmup_result, str) else warmup_result
+        # Auto-BRIEF for WARMUP companies
+        briefs = []
+        for company_name in warmup_companies:
+            brief_result = run_brief(
+                company_query=company_name,
+                analyst_path=analyst_tmp.name,
+                scout_path=_STORE_FILE,
+                fmt="json",
+            )
+            briefs.append(json.loads(brief_result) if isinstance(brief_result, str) else brief_result)
+        # Also handle explicit --brief if different from warmup companies
+        if args.brief and args.brief not in warmup_companies:
+            brief_result = run_brief(
+                company_query=args.brief,
+                analyst_path=analyst_tmp.name,
+                scout_path=_STORE_FILE,
+                fmt="json",
+            )
+            briefs.append(json.loads(brief_result) if isinstance(brief_result, str) else brief_result)
+        if briefs:
+            output["brief"] = briefs
         print(json.dumps(output, ensure_ascii=False, indent=2))
     else:
         parts = []
@@ -121,6 +152,29 @@ def main() -> None:
         if warmup_result and "нет компаний с уверенностью 100%" not in warmup_result:
             parts.append("")
             parts.append(warmup_result)
+        # Auto-BRIEF for WARMUP companies
+        if warmup_companies:
+            parts.append("")
+            parts.append("## BRIEF — досье по целевым компаниям")
+            for company_name in warmup_companies:
+                brief_result = run_brief(
+                    company_query=company_name,
+                    analyst_path=analyst_tmp.name,
+                    scout_path=_STORE_FILE,
+                    fmt="text",
+                )
+                parts.append(brief_result)
+                parts.append("")
+        # Also handle explicit --brief if different from warmup companies
+        if args.brief and args.brief not in warmup_companies:
+            brief_result = run_brief(
+                company_query=args.brief,
+                analyst_path=analyst_tmp.name,
+                scout_path=_STORE_FILE,
+                fmt="text",
+            )
+            parts.append(brief_result)
+            parts.append("")
         print("\n".join(parts))
 
     # Cleanup temp
