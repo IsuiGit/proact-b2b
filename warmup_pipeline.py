@@ -221,9 +221,39 @@ def _build_closing(strategy: str) -> str:
     return closings.get(strategy, "Давайте обсудим детали.")
 
 
+def _build_justification(event_type: str, product_key: str, amount: float) -> str:
+    """Concrete reason WHY we're reaching out with THIS product NOW."""
+    reasons = {
+        "new_procurement": {
+            "bank_guarantee": f"Компания участвует в закупках на {amount:,.0f} ₽ — для обеспечения контракта нужны тендерные гарантии",
+            "lending": f"Закупки на {amount:,.0f} ₽ требуют оборотного финансирования — предложим кредит под контракт",
+            "rko": f"Активные закупки ({amount:,.0f} ₽) — нужен расчётный счёт с выгодными условиями для тендеров",
+        },
+        "capital_change": {
+            "rko": f"Увеличение капитала до {amount:,.0f} ₽ — стандартный тариф РКО невыгоден, предложим корпоративный пакет",
+            "lending": f"Капитал {amount:,.0f} ₽ — хороший момент для расширения кредитной линии",
+        },
+        "hiring_surge": {
+            "salary_project": f"Штат растёт — зарплатный проект упростит payroll и привлечёт сотрудников",
+            "lending": f"Рост персонала говорит об expansion — нужно финансирование масштабирования",
+        },
+        "investment": {
+            "lending": f"Инвестиции в компанию — нужно финансирование для освоения вложений",
+            "rko": f"Новые инвестиции ({amount:,.0f} ₽) — требуется управление увеличенным cashflow",
+        },
+        "expansion": {
+            "lending": f"Компания расширяется — нужно оборотное финансирование для новых направлений",
+            "leasing": f"Расширение → потребность в оборудовании/технике, предложим лизинг",
+        },
+    }
+    type_reasons = reasons.get(event_type, {})
+    return type_reasons.get(product_key, f"Компания показала позитивный сигнал ({event_type}) — {product_key} поможет в развитии")
+
+
 def _build_letter(company: str, product_key: str, product_ru: str,
-                  strategy: str, event_desc: str = "", amount=None, event_type: str = "") -> dict:
-    """Build a complete manager-ready email."""
+                  strategy: str, event_desc: str = "", amount=None, event_type: str = "",
+                  rationale: str = "") -> dict:
+    """Build a complete manager-ready email with justification."""
     strategy_meta = STRATEGY_META.get(strategy, STRATEGY_META["nurture"])
     company_ru = _company_name_ru(company)
     subject = _generate_subject(company_ru, product_ru, strategy)
@@ -231,14 +261,18 @@ def _build_letter(company: str, product_key: str, product_ru: str,
     value = _build_value_paragraph(product_key, company_ru, event_type=event_type, amount=amount)
     closing = _build_closing(strategy)
 
-    # Build email body
-    body_lines = [
+    # Build email body — justification paragraph comes FIRST
+    body_lines = []
+    if rationale:
+        body_lines.append(f"**Почему мы обращаемся:** {rationale}")
+        body_lines.append("")
+    body_lines.extend([
         f"Добрый день!",
         "",
         f"Меня зовут [Имя Фамилия], я курирую корпоративных клиентов в Сбербанке.",
         "",
         event_sentence,
-    ]
+    ])
     if value:
         body_lines.append("")
         body_lines.append(value)
@@ -254,6 +288,7 @@ def _build_letter(company: str, product_key: str, product_ru: str,
     return {
         "subject": subject,
         "body": "\n".join(body_lines),
+        "rationale": rationale,
         "strategy_label": strategy_meta["label"],
         "urgency": strategy_meta["urgency"],
         "channel": strategy_meta["channel"],
@@ -381,6 +416,7 @@ def run(
                     if _normalize_company_key(scout_name) == norm:
                         hint = scout_hint
                         break
+            rationale = p.get("entry_scenario", {}).get("rationale", "")
             letter = _build_letter(
                 company=company,
                 product_key=product_key,
@@ -389,6 +425,7 @@ def run(
                 event_desc=hint.get("description", ""),
                 amount=hint.get("amount") or hint.get("max_amount"),
                 event_type=hint.get("event_type", ""),
+                rationale=rationale,
             )
             out_profiles.append({
                 "company_name": company,

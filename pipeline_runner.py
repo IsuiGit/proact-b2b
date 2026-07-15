@@ -78,7 +78,29 @@ def main() -> None:
                         help="Apply feedback adjustments before running pipeline (manual learn)")
     parser.add_argument("--feedback-general", type=str, default=None, metavar="TEXT",
                         help="Record free-form feedback after a pipeline run")
+    parser.add_argument("--stage", choices=["all", "scout", "tracker"], default="all",
+                        help="Run a single stage (for --smart orchestration)")
+    parser.add_argument("--smart", action="store_true",
+                        help="Hybrid mode: SCOUT+TRACKER local, ANALYST/BRIEF/WARMUP via LLM subagents")
     args = parser.parse_args()
+
+    # ── Handle --smart (hybrid mode: local SCOUT → LLM stages → local TRACKER) ──
+    if args.smart:
+        _OUT = os.path.join(_REPO_ROOT, "data", "task_drive", "pipeline_output")
+        os.makedirs(_OUT, exist_ok=True)
+        # 1. SCOUT (local)
+        scout_result = scout_run(
+            limit=args.limit, top_n=args.top_n, fmt="json",
+            extra_info=args.extra_info, dry_run=args.dry_run,
+        )
+        scout_json = json.loads(scout_result) if isinstance(scout_result, str) else scout_result
+        scout_path = os.path.join(_OUT, "scout_results.json")
+        with open(scout_path, "w", encoding="utf-8") as f:
+            json.dump(scout_json, f, ensure_ascii=False, indent=2)
+        print(f"SMART_SCOUT_DONE:{scout_path}")
+        print("SMART_LLM_STAGES:analyst,brief,warmup")
+        print("SMART_TRACKER_PENDING:run --stage tracker after LLM stages complete")
+        return
 
     # ── Handle --result (record contact and exit) ─────────────────
     if args.result:
@@ -115,6 +137,33 @@ def main() -> None:
         else:
             print("📭 Нет записей для обучения. Сначала соберите обратную связь через:")
             print('  python3 pipeline_runner.py --feedback-record "Компания" "Продукт" "Результат"')
+        return
+
+    # ── Handle --stage scout (smart mode: SCOUT only, save JSON) ──
+    if args.stage == "scout":
+        scout_result = scout_run(
+            limit=args.limit, top_n=args.top_n, fmt="json",
+            extra_info=args.extra_info, dry_run=args.dry_run,
+        )
+        _OUT_DIR = os.path.join(_REPO_ROOT, "data", "task_drive", "pipeline_output")
+        os.makedirs(_OUT_DIR, exist_ok=True)
+        scout_path = os.path.join(_OUT_DIR, "scout_results.json")
+        scout_json = json.loads(scout_result) if isinstance(scout_result, str) else scout_result
+        with open(scout_path, "w", encoding="utf-8") as f:
+            json.dump(scout_json, f, ensure_ascii=False, indent=2)
+        print(f"SCOUT_STAGE_DONE:{scout_path}")
+        return
+
+    # ── Handle --stage tracker (smart mode: TRACKER only) ──────────
+    if args.stage == "tracker":
+        funnel = format_funnel(top_n=args.top_n)
+        _OUT_DIR = os.path.join(_REPO_ROOT, "data", "task_drive", "pipeline_output")
+        os.makedirs(_OUT_DIR, exist_ok=True)
+        tracker_path = os.path.join(_OUT_DIR, "tracker.md")
+        content = "## 📊 TRACKER — воронка\n" + (funnel or "Зарегистрированных контактов пока нет")
+        with open(tracker_path, "w", encoding="utf-8") as f:
+            f.write(content)
+        print(f"TRACKER_STAGE_DONE:{tracker_path}")
         return
 
     # ── Step 1: SCOUT ──────────────────────────────────────────────

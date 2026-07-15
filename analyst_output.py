@@ -11,14 +11,18 @@ from typing import Any
 
 def format_as_json(profiles: list[dict[str, Any]]) -> str:
     """Full profiles as indented JSON."""
+    for p in profiles:
+        s = p.get("entry_scenario", {})
+        if "product_rationale" in s:
+            s["rationale"] = s.pop("product_rationale")
     return json.dumps({"count": len(profiles), "profiles": profiles}, ensure_ascii=False, indent=2)
 
 
 def format_as_markdown(profiles: list[dict[str, Any]], top_n: int = 50) -> str:
     """Top-N profiles as Markdown table for chat display."""
     lines = [
-        "| # | Компания | Риск | Стратегия | Топ-продукт | Уверенность |",
-        "|---|----------|------|-----------|-------------|-------------|",
+        "| # | Компания | Риск | Стратегия | Топ-продукт | Уверенность | Обоснование |",
+        "|---|----------|------|-----------|-------------|-------------|-------------|",
     ]
     for i, p in enumerate(sorted(profiles, key=lambda x: x.get("overall_score", 0), reverse=True)[:top_n], 1):
         risk = _risk_emoji(p.get("risk_profile", {}))
@@ -26,7 +30,9 @@ def format_as_markdown(profiles: list[dict[str, Any]], top_n: int = 50) -> str:
         top_product = _top_product(p.get("product_heatmap", []))
         confidence = f"{top_product['confidence']:.0%}" if top_product else "—"
         product_name = top_product["product"] if top_product else "—"
-        lines.append(f"| {i} | {p['company_name']} | {risk} | {strategy} | {product_name} | {confidence} |")
+        rationale = p.get("entry_scenario", {}).get("rationale", "")
+        rationale_short = rationale[:80] + "…" if len(rationale) > 80 else rationale
+        lines.append(f"| {i} | {p['company_name']} | {risk} | {strategy} | {product_name} | {confidence} | {rationale_short} |")
     return "\n".join(lines)
 
 

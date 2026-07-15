@@ -116,7 +116,7 @@ def _potential_revenue(event: dict) -> int:
 
 
 def enrich_event(event: dict) -> dict:
-    weight, products = calc_weight(event)
+    weight, products, rationale = calc_weight(event)
     company_name = event.get("company_name", "—")
     inn = event.get("metrics", {}).get("inn")
     return {
@@ -131,6 +131,7 @@ def enrich_event(event: dict) -> dict:
         "detected_at": event.get("detected_at", datetime.now(timezone.utc).isoformat()),
         "recommended_products": products,
         "source": event.get("source", ""),
+        "rationale": rationale,
     }
 
 

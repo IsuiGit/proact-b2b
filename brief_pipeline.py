@@ -188,10 +188,11 @@ def _build_brief(result: dict[str, Any], fmt: str = "text") -> str:
         strategy_text = STRATEGY_LABELS.get(strategy, strategy)
 
         lines.append("### Риск-резюме")
-        lines.append(f""
-                     f"| Риск | {icon} {label} |"
-                     f"| Общий скор | {overall}/10 |"
-                     f"| Стратегия | {strategy_text} |")
+        lines.append("| Параметр | Значение |")
+        lines.append("|---|---|")
+        lines.append(f"| Риск | {icon} {label} |")
+        lines.append(f"| Общий скор | {overall}/10 |")
+        lines.append(f"| Стратегия | {strategy_text} |")
         lines.append("")
 
         # Revenue summary
