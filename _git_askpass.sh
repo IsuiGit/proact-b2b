@@ -1,2 +1,2 @@
 #!/bin/bash
-cat /root/Ouroboros/data/task_drive/.creds/github_token
+cat /root/ouroboros/data/task_drive/.creds/github_token
