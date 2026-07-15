@@ -35,6 +35,7 @@ from scout_pipeline import run as scout_run
 from analyst_pipeline import run_analyst
 from warmup_pipeline import run as warmup_run
 from brief_pipeline import run_brief
+from tracker_pipeline import run as tracker_run, record_contact, should_warmup, format_funnel
 
 
 def main() -> None:
@@ -45,8 +46,18 @@ def main() -> None:
     parser.add_argument("--extra-info", action="store_true", help="include scan summaries")
     parser.add_argument("--dry-run", action="store_true", help="skip store writes")
     parser.add_argument("--skip-warmup", action="store_true", help="skip WARMUP stage")
+    parser.add_argument("--skip-tracker", action="store_true", help="skip TRACKER filtering")
     parser.add_argument("--brief", type=str, default=None, help="company name/INN for BRIEF report")
+    parser.add_argument("--result", nargs=2, metavar=("COMPANY", "STATUS"),
+                        help="Record contact result: <company> <status>")
     args = parser.parse_args()
+
+    # ── Handle --result (record contact and exit) ─────────────────
+    if args.result:
+        company, status = args.result
+        record_contact(company, status)
+        print(f"✅ Contact recorded: {company} → {status}")
+        return
 
     # ── Step 1: SCOUT ──────────────────────────────────────────────
     scout_result = scout_run(
@@ -94,23 +105,48 @@ def main() -> None:
 
     # ── Step 3: WARMUP (only 100%-confidence companies) ───────────
     warmup_result = None
-    if not args.skip_warmup:
+    
+    # Extract ALL warmup-target companies first
+    all_warmup_companies = []
+    for p in analyst_json.get("profiles", []):
+        heatmap = p.get("product_heatmap", [])
+        if any(pr.get("score", 0) >= 1.0 for pr in heatmap):
+            all_warmup_companies.append(p.get("company_name", ""))
+    
+    # Filter through tracker (remove already-contacted)
+    if not args.skip_tracker and all_warmup_companies:
+        warmup_companies = [c for c in all_warmup_companies if should_warmup(c)]
+        filtered_out = len(all_warmup_companies) - len(warmup_companies)
+    else:
+        warmup_companies = all_warmup_companies
+        filtered_out = 0
+    
+    if not args.skip_warmup and warmup_companies:
+        # Write filtered targets to a temp file for WARMUP
+        targets_tmp = tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False, encoding="utf-8", dir=_DELIVERABLES)
+        json.dump({"companies": warmup_companies, "analyst_path": analyst_tmp.name, "scout_store": _STORE_FILE}, targets_tmp, ensure_ascii=False, indent=2)
+        targets_tmp.close()
+        
         warmup_result = warmup_run(
-            input_json=analyst_tmp.name,
+            input_json=targets_tmp.name,
             scout_store=_STORE_FILE,
             top_n=args.top_n,
             fmt=args.format,
         )
+        
+        try:
+            os.unlink(targets_tmp.name)
+        except OSError:
+            pass
 
-    # ── Extract WARMUP-target companies for auto-BRIEF ─────────────
-    warmup_companies = []
-    if not args.skip_warmup:
-        for p in analyst_json.get("profiles", []):
-            heatmap = p.get("product_heatmap", [])
-            if any(pr.get("score", 0) >= 1.0 for pr in heatmap):
-                warmup_companies.append(p.get("company_name", ""))
+    # ── Step 4: TRACKER funnel output ────────────────────────────
+    tracker_markdown = None
+    if not args.skip_tracker:
+        tracker_markdown = format_funnel()
+        if filtered_out:
+            tracker_markdown += f"\n**Отфильтровано повторных:** {filtered_out} из {len(all_warmup_companies)}"
 
-    # ── Step 4: Combined output ────────────────────────────────────
+    # ── Step 5: Combined output ────────────────────────────────────
     if args.format == "json":
         output = {
             "scout": scout_json if isinstance(scout_json, dict) else {"events": scout_json},
@@ -139,6 +175,9 @@ def main() -> None:
             briefs.append(json.loads(brief_result) if isinstance(brief_result, str) else brief_result)
         if briefs:
             output["brief"] = briefs
+        # Include TRACKER funnel
+        if tracker_markdown:
+            output["tracker_funnel"] = format_funnel()
         print(json.dumps(output, ensure_ascii=False, indent=2))
     else:
         parts = []
@@ -175,6 +214,14 @@ def main() -> None:
             )
             parts.append(brief_result)
             parts.append("")
+        # TRACKER funnel
+        if not args.skip_tracker:
+            funnel = format_funnel(top_n=args.top_n)
+            if funnel:
+                parts.append("## 🔍 TRACKER — воронка")
+                parts.append(funnel)
+                if filtered_out:
+                    parts.append(f"\n**Отфильтровано повторных:** {filtered_out} из {len(all_warmup_companies)}")
         print("\n".join(parts))
 
     # Cleanup temp
