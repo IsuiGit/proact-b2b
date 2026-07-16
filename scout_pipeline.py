@@ -1,18 +1,13 @@
 #!/usr/bin/env python3
-"""SCOUT B2B Pipeline — standalone runner.
+"""SCOUT B2B Pipeline — raw event collector.
 
-No git, no skill-review gates, no commit_reviewed.
+No scoring, no weights, no rationale. Just collects events from sources,
+deduplicates, and outputs raw JSON for LLM analysis.
 
 Usage:
-    python ~/Ouroboros/Deliverables/scout_pipeline.py              # Markdown (chat)
-    python ~/Ouroboros/Deliverables/scout_pipeline.py --format json # JSON (tools)
-    python ~/Ouroboros/Deliverables/scout_pipeline.py --top-n 20    # top 20 results
-
-Dependencies: lives in data/skills/external/scout/ (sources, significance, output).
-This script just adds the skill directory to sys.path and calls the pipeline.
-
-The store (pipeline_store.json) still writes to data/sberbank_pipeline/ —
-it is a separate JSON file, not a git-tracked artifact.
+    python scout_pipeline.py              # text output
+    python scout_pipeline.py --format json # JSON output
+    python scout_pipeline.py --top-n 20    # limit results
 """
 
 import argparse
@@ -25,14 +20,11 @@ from pathlib import Path
 # ── Locate the SCOUT skill directory ──────────────────────────────────
 _SKILL_DIR = Path(__file__).resolve().parent.parent / "data" / "skills" / "external" / "scout"
 if not _SKILL_DIR.is_dir():
-    # Fallback: try relative to ~/ouroboros
     _alt = Path.home() / "ouroboros" / "data" / "skills" / "external" / "scout"
     if _alt.is_dir():
         _SKILL_DIR = _alt
     else:
         print(f"[ERROR] Cannot find scout skill directory.", file=sys.stderr)
-        print(f"  Tried: {_SKILL_DIR}", file=sys.stderr)
-        print(f"  Also:  {_alt}", file=sys.stderr)
         sys.exit(1)
 
 if str(_SKILL_DIR) not in sys.path:
@@ -41,12 +33,8 @@ if str(_SKILL_DIR) not in sys.path:
 # ── Pipeline store ────────────────────────────────────────────────────
 _STORE_DIR = Path(__file__).resolve().parent.parent / "data" / "sberbank_pipeline"
 
-# ── Import SCOUT modules ─────────────────────────────────────────────
-from significance import calc_weight
-from output import format_top_events, format_as_json, format_scan_summary
+# ── Import SCOUT fetchers ─────────────────────────────────────────────
 from sources.base import BaseFetcher
-
-# Source imports (all follow BaseFetcher contract)
 from sources.zakupki import ZakupkiFetcher
 from sources.kad_arbitr import KadArbitrFetcher
 from sources.fedresurs import FedresursFetcher
@@ -60,7 +48,6 @@ from sources.mock_hh import MockHHFetcher
 
 
 def get_fetchers() -> list[BaseFetcher]:
-    """Return all fetchers, ordered by priority."""
     return [
         ZakupkiFetcher(),
         KadArbitrFetcher(),
@@ -77,7 +64,7 @@ def get_fetchers() -> list[BaseFetcher]:
 
 def generate_id(event: dict) -> str:
     content = f"{event['company_name']}:{event['event_type']}:{event.get('raw_snippet', '')}"
-    return hashlib.md5(content.encode()).hexdigest()[:4]
+    return hashlib.md5(content.encode()).hexdigest()[:8]
 
 
 def _make_company_id(company_name: str, inn: str | None = None) -> str:
@@ -88,20 +75,12 @@ def _make_company_id(company_name: str, inn: str | None = None) -> str:
     return f"co_{safe}"
 
 
-def dedup_events(events: list[dict]) -> list[dict]:
-    seen = {}
-    for event in events:
-        key = f"{event['company_name']}:{event['event_type']}"
-        weight = event.get("weight", 0)
-        if key not in seen or weight > seen[key].get("weight", 0):
-            seen[key] = event
-    return list(seen.values())
-
-
 def _event_description(event: dict) -> str:
-    name = event.get("company_name", "—")
-    etype = event.get("event_type", "")
-    return f"{name}: {etype}"
+    return (
+        event.get("raw_snippet", "")
+        or event.get("description", "")
+        or f"{event.get('company_name', '—')}: {event.get('event_type', '')}"
+    )
 
 
 def _potential_revenue(event: dict) -> int:
@@ -115,24 +94,29 @@ def _potential_revenue(event: dict) -> int:
     )
 
 
-def enrich_event(event: dict) -> dict:
-    weight, products, rationale = calc_weight(event)
+def normalize_event(event: dict) -> dict:
+    """Convert raw fetcher event to clean output format. No scoring."""
     company_name = event.get("company_name", "—")
     inn = event.get("metrics", {}).get("inn")
     return {
         "id": generate_id(event),
-        "company_id": _make_company_id(company_name, inn),
         "company_name": company_name,
         "inn": inn,
+        "source": event.get("source", ""),
         "event_type": event.get("event_type", ""),
         "event_description": _event_description(event),
-        "weight": weight,
-        "potential_revenue": _potential_revenue(event),
+        "amount": _potential_revenue(event),
         "detected_at": event.get("detected_at", datetime.now(timezone.utc).isoformat()),
-        "recommended_products": products,
-        "source": event.get("source", ""),
-        "rationale": rationale,
     }
+
+
+def dedup_events(events: list[dict]) -> list[dict]:
+    seen = {}
+    for event in events:
+        key = f"{event['company_name']}:{event['event_type']}"
+        if key not in seen:
+            seen[key] = event
+    return list(seen.values())
 
 
 def _read_store() -> dict:
@@ -192,18 +176,22 @@ def run(limit: int = 1000, top_n: int = 50, fmt: str = "text", extra_info: bool 
 
     print(f"[SCOUT] Total raw events: {len(raw_events)}", file=sys.stderr)
 
-    # 2. Score
-    scored_events = [enrich_event(e) for e in raw_events]
+    # 2. Normalize (no scoring)
+    normalized = [normalize_event(e) for e in raw_events]
 
     # 3. Dedup
-    unique_events = dedup_events(scored_events)
+    unique_events = dedup_events(normalized)
     print(f"[SCOUT] Unique after dedup: {len(unique_events)}", file=sys.stderr)
 
-    # 4. Sort + top-N
-    unique_events.sort(key=lambda e: e["weight"], reverse=True)
+    # 4. Top-N (by amount descending)
+    unique_events.sort(key=lambda e: e.get("amount", 0), reverse=True)
     top_events = unique_events[:top_n]
 
-    # 5. Store (unless dry-run)
+    # 5. Add company_id for store
+    for ev in top_events:
+        ev["company_id"] = _make_company_id(ev["company_name"], ev.get("inn"))
+
+    # 6. Store
     if not dry_run:
         try:
             save_last_result(
@@ -216,20 +204,36 @@ def run(limit: int = 1000, top_n: int = 50, fmt: str = "text", extra_info: bool 
         except Exception as e:
             print(f"[SCOUT] Store write failed: {e}", file=sys.stderr)
 
-    # 6. Format
+    # 7. Format output
     if fmt == "json":
-        return format_as_json(top_events, top_n=top_n)
+        return json.dumps({
+            "scanned_at": datetime.now(timezone.utc).isoformat(),
+            "raw_count": len(raw_events),
+            "unique_count": len(unique_events),
+            "source_stats": source_stats,
+            "events": top_events,
+        }, ensure_ascii=False, indent=2, default=str)
     else:
-        # --extra-info shows scan summary + table; default is bare table only
-        table = format_top_events(top_events, top_n=top_n, header=False)
-        if extra_info:
-            summary = format_scan_summary(len(raw_events), len(unique_events), source_stats, top_n=top_n)
-            return summary + "\n\n" + table
-        return table
+        lines = [
+            f"**{len(source_stats)} источников** → {len(raw_events)} сырых → {len(unique_events)} уникальных → **Топ-{len(top_events)}**",
+            "",
+            "| # | Компания | Источник | Событие | Сумма |",
+            "|---|----------|----------|---------|-------|",
+        ]
+        for i, ev in enumerate(top_events, 1):
+            amt = ev.get("amount", 0)
+            if amt >= 1e6:
+                amt_str = f"{amt/1e6:.1f} млн ₽"
+            elif amt >= 1e3:
+                amt_str = f"{amt/1e3:.0f} тыс ₽"
+            else:
+                amt_str = "—"
+            lines.append(f"| {i} | {ev['company_name']} | {ev['source']} | {ev['event_type']} | {amt_str} |")
+        return "\n".join(lines)
 
 
 def main():
-    parser = argparse.ArgumentParser(description="SCOUT B2B Pipeline — standalone")
+    parser = argparse.ArgumentParser(description="SCOUT B2B Pipeline — raw collector")
     parser.add_argument("--limit", type=int, default=1000)
     parser.add_argument("--top-n", type=int, default=50)
     parser.add_argument("--format", type=str, choices=["text", "json"], default="text")
@@ -237,7 +241,6 @@ def main():
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
     result = run(limit=args.limit, top_n=args.top_n, fmt=args.format, extra_info=args.extra_info, dry_run=args.dry_run)
-    # Always print raw text — let the chat renderer interpret markdown
     print(result)
 
 

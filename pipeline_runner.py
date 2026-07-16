@@ -82,25 +82,112 @@ def main() -> None:
                         help="Run a single stage (for --smart orchestration)")
     parser.add_argument("--smart", action="store_true",
                         help="Hybrid mode: SCOUT+TRACKER local, ANALYST/BRIEF/WARMUP via LLM subagents")
+    parser.add_argument("--smart-collect", action="store_true",
+                        help="Collect subagent output files, sanitize, split analyst/brief, run tracker")
     args = parser.parse_args()
 
-    # ── Handle --smart (hybrid mode: local SCOUT → LLM stages → local TRACKER) ──
+    # ── Handle --smart (local SCOUT → raw JSON for parent LLM analysis) ──
     if args.smart:
-        _OUT = os.path.join(_REPO_ROOT, "data", "task_drive", "pipeline_output")
+        _OUT = os.path.join(_REPO_ROOT, "Deliverables", "pipeline_output")
         os.makedirs(_OUT, exist_ok=True)
-        # 1. SCOUT (local)
+
+        # 1. SCOUT (local) — collect raw events, no scoring
         scout_result = scout_run(
             limit=args.limit, top_n=args.top_n, fmt="json",
             extra_info=args.extra_info, dry_run=args.dry_run,
         )
         scout_json = json.loads(scout_result) if isinstance(scout_result, str) else scout_result
-        scout_path = os.path.join(_OUT, "scout_results.json")
-        with open(scout_path, "w", encoding="utf-8") as f:
+
+        # 2. Save raw scout output for parent LLM to analyze
+        scout_raw_path = os.path.join(_OUT, "scout_raw.json")
+        with open(scout_raw_path, "w", encoding="utf-8") as f:
             json.dump(scout_json, f, ensure_ascii=False, indent=2)
-        print(f"SMART_SCOUT_DONE:{scout_path}")
-        print("SMART_LLM_STAGES:scout,analyst,brief,warmup")
-        print("SMART_SCOUT_REFINE:needed")
-        print("SMART_TRACKER_PENDING:run --stage tracker after LLM stages complete")
+
+        events = scout_json.get("events", scout_json) if isinstance(scout_json, dict) else scout_json
+        if not isinstance(events, list):
+            events = []
+
+        # 3. Print marker for parent agent
+        print(f"SCOUT_RAW_READY:{scout_raw_path}")
+        print(f"SCOUT_COMPANIES:{len(events)}")
+        print("NEXT: Parent LLM reads scout_raw.json, analyzes, writes analyst_brief_llm.md + warmup_llm.md, then runs --smart-collect")
+        return
+
+    # ── Handle --smart-collect (collect subagent files, sanitize, split, tracker) ──
+    if args.smart_collect:
+        _OUT = os.path.join(_REPO_ROOT, "Deliverables", "pipeline_output")
+        os.makedirs(_OUT, exist_ok=True)
+
+        # Import sanitizer
+        sys.path.insert(0, _DELIVERABLES)
+        from sanitize_llm_output import sanitize
+
+        # 1. Read subagent output files
+        analyst_brief_path = os.path.join(_OUT, "analyst_brief_llm.md")
+        warmup_path = os.path.join(_OUT, "warmup_llm.md")
+
+        results = {}
+
+        # ANALYST+BRIEF file
+        if os.path.exists(analyst_brief_path):
+            with open(analyst_brief_path, "r", encoding="utf-8") as f:
+                raw_ab = f.read()
+            cleaned_ab = sanitize(raw_ab)
+            # Split: find BRIEF section delimiter
+            brief_markers = ["## 📋 BRIEF", "## BRIEF", "# BRIEF", "## 📋 Досье", "## Досье"]
+            analyst_text = cleaned_ab
+            brief_text = ""
+            for marker in brief_markers:
+                idx = cleaned_ab.find(marker)
+                if idx >= 0:
+                    analyst_text = cleaned_ab[:idx].strip()
+                    brief_text = cleaned_ab[idx:].strip()
+                    break
+
+            if analyst_text:
+                results["analyst"] = analyst_text
+                # Don't double-prepend the header if subagent already included it
+                analyst_header = "## 2️⃣ ANALYST — профили компаний"
+                if analyst_text.startswith(analyst_header) or f"\n{analyst_header}" in analyst_text:
+                    with open(os.path.join(_OUT, "analyst.md"), "w", encoding="utf-8") as f:
+                        f.write(analyst_text)
+                else:
+                    with open(os.path.join(_OUT, "analyst.md"), "w", encoding="utf-8") as f:
+                        f.write(analyst_header + "\n" + analyst_text)
+            if brief_text:
+                results["brief"] = brief_text
+                with open(os.path.join(_OUT, "brief.md"), "w", encoding="utf-8") as f:
+                    f.write(brief_text)
+        else:
+            print(f"[WARN] analyst_brief_llm.md not found at {analyst_brief_path}")
+
+        # WARMUP file
+        if os.path.exists(warmup_path):
+            with open(warmup_path, "r", encoding="utf-8") as f:
+                raw_warm = f.read()
+            cleaned_warm = sanitize(raw_warm)
+            if cleaned_warm:
+                results["warmup"] = cleaned_warm
+                with open(os.path.join(_OUT, "warmup.md"), "w", encoding="utf-8") as f:
+                    f.write(cleaned_warm)
+        else:
+            print(f"[WARN] warmup_llm.md not found at {warmup_path}")
+
+        # 2. Run TRACKER (local)
+        tracker_path = os.path.join(_OUT, "tracker.md")
+        funnel = format_funnel(top_n=args.top_n)
+        tracker_content = "## 📊 TRACKER — воронка\n" + (funnel or "Зарегистрированных контактов пока нет")
+        with open(tracker_path, "w", encoding="utf-8") as f:
+            f.write(tracker_content)
+        results["tracker"] = tracker_content
+
+        # 3. Output manifest for the orchestrator (parent agent)
+        for stage in ["scout", "analyst", "brief", "warmup", "tracker"]:
+            path = os.path.join(_OUT, f"{stage}.md")
+            if os.path.exists(path):
+                print(f"COLLECT_{stage.upper()}:{path}")
+
+        print(f"SMART_COLLECT_DONE:{_OUT}")
         return
 
     # ── Handle --result (record contact and exit) ─────────────────
