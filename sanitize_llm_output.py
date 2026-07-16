@@ -53,7 +53,7 @@ _CODE_PATTERNS = [
 ]
 
 # Stray non-Russian/Cyrillic-adjacent characters that leak from LLM reasoning
-_UNICODE_NOISE = re.compile(r'[\u4e00-\u9fff\u3400-\u4dbf]')  # CJK chars
+_UNICODE_NOISE = re.compile(r'[\u4e00-\u9fff\u3400-\u4dbf\u3000-\u303f\uff00-\uffef]')  # CJK ideographs + punctuation + fullwidth
 
 
 def _is_meta_line(line: str) -> bool:
