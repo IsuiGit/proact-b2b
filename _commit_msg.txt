@@ -1,0 +1,7 @@
+Update prompts: detailed segment actions, financing rationale, risk explanations, source rebalancing
+
+1. ANALYST: expanded VIP/High/Medium/Low segment actions with concrete steps
+2. WARMUP: added rationale for borrowed funds vs own funds, urgency of immediate action
+3. BRIEF: added 'why we ask' reasoning for clarification questions
+4. BRIEF: expanded risk-factors to explain WHY each factor is a risk
+5. SCOUT: rebalanced weights — capital_change 6→7, reorganization 5→6, boosted fedresurs/egrul_changes sources, lowered zakupki/kontur_zakupki

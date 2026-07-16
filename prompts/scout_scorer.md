@@ -27,10 +27,10 @@
 
 | event_type | Базовый вес | Условие |
 |---|---|---|
-| `capital_change` | 6 | Рост капитала (увеличение, допэмиссия) |
+| `capital_change` | 7 | Рост капитала (увеличение, допэмиссия) |
 | `capital_change` | 1 | Уменьшение капитала |
 | `new_procurement` | 7 | — |
-| `reorganization` | 5 | Слияние, присоединение, выделение |
+| `reorganization` | 6 | Слияние, присоединение, выделение |
 | `new_registration` | 2 | — |
 | `court_case` | 2 | Компания — истец |
 | `court_case` | 1 | Компания — ответчик |
@@ -54,8 +54,10 @@
 | Источник | Модификатор |
 |---|---|
 | `e_disclosure` | +1 |
-| `zakupki` | +1 |
-| `kontur_zakupki` | +1 |
+| `fedresurs` | +1 |
+| `egrul_changes` | +1 |
+| `zakupki` | +0 |
+| `kontur_zakupki` | +0 |
 | `kad_arbitr` | −1 |
 | Остальные | +0 |
 
