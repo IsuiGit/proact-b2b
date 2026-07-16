@@ -1,0 +1,80 @@
+[
+  {
+    "company_name": "ПАО Норникель",
+    "source": "e_disclosure",
+    "event_type": "capital_change",
+    "event_description": "Раскрытие: ПАО Норникель — Решение о дроблении акций",
+    "amount": 1000000000,
+    "weight": 12,
+    "industry": "Металлургия",
+    "products": [
+      "Кредитование",
+      "РКО",
+      "ВЭД"
+    ],
+    "risk": "Низкий",
+    "confidence": 95
+  },
+  {
+    "company_name": "ПАО Газпром",
+    "source": "e_disclosure",
+    "event_type": "capital_change",
+    "event_description": "Раскрытие: ПАО Газпром — Увеличение уставного капитала путём допэмиссии",
+    "amount": 500000000,
+    "weight": 12,
+    "industry": "Нефтегаз",
+    "products": [
+      "Кредитование",
+      "РКО",
+      "ВЭД"
+    ],
+    "risk": "Низкий",
+    "confidence": 95
+  },
+  {
+    "company_name": "ПАО МТС",
+    "source": "e_disclosure",
+    "event_type": "capital_change",
+    "event_description": "Раскрытие: ПАО МТС — Увеличение уставного капитала путём допэмиссии",
+    "amount": 50000000,
+    "weight": 10,
+    "industry": "Телеком/ИТ",
+    "products": [
+      "Кредитование",
+      "РКО"
+    ],
+    "risk": "Низкий",
+    "confidence": 89
+  },
+  {
+    "company_name": "ПАН Алроса",
+    "source": "e_disclosure",
+    "event_type": "capital_change",
+    "event_description": "Раскрытие: ПАН Алроса — Решение о консолидации акций",
+    "amount": 1000000000,
+    "weight": 10,
+    "industry": "Металлургия",
+    "products": [
+      "Кредитование",
+      "РКО",
+      "ВЭД"
+    ],
+    "risk": "Низкий",
+    "confidence": 88
+  },
+  {
+    "company_name": "ЗАО \"АльфаХолдинг\"",
+    "source": "egrul_changes",
+    "event_type": "capital_change",
+    "event_description": "Увеличение уставного капитала",
+    "amount": 100000000,
+    "weight": 9,
+    "industry": "Телеком/ИТ",
+    "products": [
+      "Кредитование",
+      "РКО"
+    ],
+    "risk": "Низкий",
+    "confidence": 80
+  }
+]
