@@ -1,12 +1,12 @@
 {
-  "scanned_at": "2026-07-16T16:10:06.548957+00:00",
-  "raw_count": 565,
-  "unique_count": 123,
+  "scanned_at": "2026-07-16T16:58:30.509825+00:00",
+  "raw_count": 597,
+  "unique_count": 147,
   "source_stats": [
     {
       "name": "zakupki",
       "mode": "mock",
-      "count": 8
+      "count": 20
     },
     {
       "name": "kad_arbitr",
@@ -21,12 +21,12 @@
     {
       "name": "e_disclosure",
       "mode": "mock",
-      "count": 12
+      "count": 20
     },
     {
       "name": "kontur_zakupki",
       "mode": "mock",
-      "count": 8
+      "count": 20
     },
     {
       "name": "news_rss",
@@ -56,70 +56,81 @@
   ],
   "events": [
     {
-      "id": "396776a4",
-      "company_name": "ПАО Роснефть",
+      "id": "ffa9acba",
+      "company_name": "ПАО Аэрофлот",
       "inn": null,
       "source": "e_disclosure",
       "event_type": "capital_change",
-      "event_description": "Раскрытие: ПАО Роснефть — Решение о консолидации акций",
+      "event_description": "Раскрытие: ПАО Аэрофлот — Увеличение уставного капитала путём допэмиссии",
       "amount": 1000000000,
-      "detected_at": "2026-07-12T04:10:03.417510+00:00",
-      "company_id": "co_пао_роснефть"
+      "detected_at": "2026-07-12T11:58:28.847502+00:00",
+      "company_id": "co_пао_аэрофлот"
     },
     {
-      "id": "ca5e2fd7",
-      "company_name": "АО ЛогистикПро",
+      "id": "be228131",
+      "company_name": "ПАО МТС",
+      "inn": null,
+      "source": "e_disclosure",
+      "event_type": "capital_change",
+      "event_description": "Раскрытие: ПАО МТС — Решение о дроблении акций",
+      "amount": 500000000,
+      "detected_at": "2026-07-16T12:58:28.847502+00:00",
+      "company_id": "co_пао_мтс"
+    },
+    {
+      "id": "6ac36e30",
+      "company_name": "АО ЭнергоСнаб",
       "inn": null,
       "source": "kontur_zakupki",
       "event_type": "new_procurement",
       "event_description": "Закупка: Строительство логистического центра",
       "amount": 350000000,
-      "detected_at": "2026-07-14T09:10:03.418570+00:00",
-      "company_id": "co_ао_логистикпро"
-    },
-    {
-      "id": "c74540d5",
-      "company_name": "АО КубаньНефть",
-      "inn": null,
-      "source": "fedresurs",
-      "event_type": "capital_change",
-      "event_description": "Федресурс: АО КубаньНефть — Изменение размера уставного капитала",
-      "amount": 100000000,
-      "detected_at": "2026-07-14T01:10:03.417322+00:00",
-      "company_id": "co_ао_кубаньнефть"
-    },
-    {
-      "id": "c83566fe",
-      "company_name": "АО \"СберСтрой\"",
-      "inn": null,
-      "source": "egrul_changes",
-      "event_type": "capital_change",
-      "event_description": "Увеличение уставного капитала",
-      "amount": 100000000,
-      "detected_at": "2026-07-10T19:10:06.526145+00:00",
-      "company_id": "co_ао__сберстрой_"
-    },
-    {
-      "id": "629863d2",
-      "company_name": "АО ЭнергоСнаб",
-      "inn": null,
-      "source": "kontur_zakupki",
-      "event_type": "new_procurement",
-      "event_description": "Закупка: Поставка нефтепродуктов",
-      "amount": 95000000,
-      "detected_at": "2026-07-13T17:10:03.418570+00:00",
+      "detected_at": "2026-07-16T10:58:28.847621+00:00",
       "company_id": "co_ао_энергоснаб"
     },
     {
-      "id": "300a6019",
-      "company_name": "ПАО РосСтрой",
+      "id": "54082a86",
+      "company_name": "ООО СтройМастер",
       "inn": null,
-      "source": "kad_arbitr",
-      "event_type": "court_case",
-      "event_description": "Арбитражное дело: банкротство юридического лица",
-      "amount": 50000000,
-      "detected_at": "2026-07-12T20:10:03.417159+00:00",
-      "company_id": "co_пао_росстрой"
+      "source": "kontur_zakupki",
+      "event_type": "new_procurement",
+      "event_description": "Закупка: Капитальный ремонт производственного здания",
+      "amount": 180000000,
+      "detected_at": "2026-07-12T19:58:28.847621+00:00",
+      "company_id": "co_ооо_строймастер"
+    },
+    {
+      "id": "9b817f80",
+      "company_name": "АО ДальВостокРазвитие",
+      "inn": null,
+      "source": "zakupki",
+      "event_type": "new_procurement",
+      "event_description": "Закупка №0373935554: строительство инженерных сетей",
+      "amount": 150000000,
+      "detected_at": "2026-07-15T10:58:28.847045+00:00",
+      "company_id": "co_ао_дальвостокразвитие"
+    },
+    {
+      "id": "d7d347af",
+      "company_name": "ПАО СеверТранс",
+      "inn": null,
+      "source": "fedresurs",
+      "event_type": "capital_change",
+      "event_description": "Федресурс: ПАО СеверТранс — Изменение размера уставного капитала",
+      "amount": 100000000,
+      "detected_at": "2026-07-11T15:58:28.847377+00:00",
+      "company_id": "co_пао_севертранс"
+    },
+    {
+      "id": "6481b066",
+      "company_name": "ПАН Алроса",
+      "inn": null,
+      "source": "e_disclosure",
+      "event_type": "capital_change",
+      "event_description": "Раскрытие: ПАН Алроса — Увеличение уставного капитала путём допэмиссии",
+      "amount": 100000000,
+      "detected_at": "2026-07-12T19:58:28.847502+00:00",
+      "company_id": "co_пан_алроса"
     },
     {
       "id": "7fe63008",
@@ -128,64 +139,141 @@
       "source": "e_disclosure",
       "event_type": "capital_change",
       "event_description": "Раскрытие: ПАО Газпром — Решение о дроблении акций",
-      "amount": 50000000,
-      "detected_at": "2026-07-12T04:10:03.417510+00:00",
+      "amount": 100000000,
+      "detected_at": "2026-07-13T17:58:28.847502+00:00",
       "company_id": "co_пао_газпром"
     },
     {
-      "id": "7143ef67",
-      "company_name": "ПАО ТрансЛогистик",
+      "id": "c1361dbb",
+      "company_name": "ЗАО \"АльфаАльянс\"",
       "inn": null,
-      "source": "fns",
+      "source": "egrul_changes",
       "event_type": "capital_change",
-      "event_description": "ФНС: реорганизация (слияние)",
-      "amount": 50000000,
-      "detected_at": "2026-07-13T03:10:06.526570+00:00",
-      "company_id": "co_пао_транслогистик"
+      "event_description": "Увеличение уставного капитала",
+      "amount": 100000000,
+      "detected_at": "2026-07-11T16:58:30.503094+00:00",
+      "company_id": "co_зао__альфаальянс_"
     },
     {
-      "id": "5e50dbdb",
-      "company_name": "АО ПромСтрой",
-      "inn": null,
-      "source": "fns",
-      "event_type": "capital_change",
-      "event_description": "ФНС: реорганизация (слияние)",
-      "amount": 50000000,
-      "detected_at": "2026-07-12T09:10:06.526570+00:00",
-      "company_id": "co_ао_промстрой"
-    },
-    {
-      "id": "6f6e2f02",
-      "company_name": "ООО Инвест-Групп",
+      "id": "df4419aa",
+      "company_name": "АО МегаСтрой",
       "inn": null,
       "source": "zakupki",
       "event_type": "new_procurement",
-      "event_description": "Закупка №0373235894: строительство инженерных сетей",
-      "amount": 45000000,
-      "detected_at": "2026-07-15T02:10:03.416180+00:00",
-      "company_id": "co_ооо_инвест_групп"
+      "event_description": "Закупка №0373422421: выполнение работ по благоустройству",
+      "amount": 78000000,
+      "detected_at": "2026-07-14T08:58:28.847045+00:00",
+      "company_id": "co_ао_мегастрой"
     },
     {
-      "id": "d0db92df",
+      "id": "570c0a80",
+      "company_name": "ООО ДорСтройМонтаж",
+      "inn": null,
+      "source": "kontur_zakupki",
+      "event_type": "new_procurement",
+      "event_description": "Закупка: Реконструкция инженерных сетей",
+      "amount": 60000000,
+      "detected_at": "2026-07-14T03:58:28.847621+00:00",
+      "company_id": "co_ооо_дорстроймонтаж"
+    },
+    {
+      "id": "9f0377e0",
+      "company_name": "ПАО ТелеКомГрупп",
+      "inn": null,
+      "source": "kontur_zakupki",
+      "event_type": "new_procurement",
+      "event_description": "Закупка: Реконструкция инженерных сетей",
+      "amount": 60000000,
+      "detected_at": "2026-07-15T17:58:28.847621+00:00",
+      "company_id": "co_пао_телекомгрупп"
+    },
+    {
+      "id": "c0bb5381",
+      "company_name": "АО ЛогистикПро",
+      "inn": null,
+      "source": "kontur_zakupki",
+      "event_type": "new_procurement",
+      "event_description": "Закупка: Реконструкция инженерных сетей",
+      "amount": 60000000,
+      "detected_at": "2026-07-16T03:58:28.847621+00:00",
+      "company_id": "co_ао_логистикпро"
+    },
+    {
+      "id": "3be27edf",
+      "company_name": "ООО ПромТех",
+      "inn": null,
+      "source": "kad_arbitr",
+      "event_type": "court_case",
+      "event_description": "Арбитражное дело: банкротство юридического лица",
+      "amount": 50000000,
+      "detected_at": "2026-07-13T15:58:28.847282+00:00",
+      "company_id": "co_ооо_промтех"
+    },
+    {
+      "id": "ea9a587a",
+      "company_name": "ООО ВолгаТрейд",
+      "inn": null,
+      "source": "kad_arbitr",
+      "event_type": "court_case",
+      "event_description": "Арбитражное дело: банкротство юридического лица",
+      "amount": 50000000,
+      "detected_at": "2026-07-14T05:58:28.847282+00:00",
+      "company_id": "co_ооо_волгатрейд"
+    },
+    {
+      "id": "54d98bb3",
+      "company_name": "ПАН ФСК ЕЭС",
+      "inn": null,
+      "source": "e_disclosure",
+      "event_type": "capital_change",
+      "event_description": "Раскрытие: ПАН ФСК ЕЭС — Увеличение уставного капитала путём допэмиссии",
+      "amount": 50000000,
+      "detected_at": "2026-07-11T20:58:28.847502+00:00",
+      "company_id": "co_пан_фск_еэс"
+    },
+    {
+      "id": "441571a7",
+      "company_name": "ПАО Сбербанк",
+      "inn": null,
+      "source": "e_disclosure",
+      "event_type": "capital_change",
+      "event_description": "Раскрытие: ПАО Сбербанк — Существенное изменение размера уставного капитала",
+      "amount": 50000000,
+      "detected_at": "2026-07-15T19:58:28.847502+00:00",
+      "company_id": "co_пао_сбербанк"
+    },
+    {
+      "id": "59672b5e",
+      "company_name": "ООО Сиб-Энерго",
+      "inn": null,
+      "source": "fns",
+      "event_type": "capital_change",
+      "event_description": "ФНС: реорганизация (слияние)",
+      "amount": 50000000,
+      "detected_at": "2026-07-15T01:58:30.503567+00:00",
+      "company_id": "co_ооо_сиб_энерго"
+    },
+    {
+      "id": "c6b9195d",
       "company_name": "ООО СтройМонтаж",
       "inn": null,
       "source": "zakupki",
       "event_type": "new_procurement",
-      "event_description": "Закупка №0373622812: капитальный ремонт фасада здания",
+      "event_description": "Закупка №0373117695: оказание услуг по техническому обслуживанию",
       "amount": 45000000,
-      "detected_at": "2026-07-15T12:10:03.416180+00:00",
+      "detected_at": "2026-07-15T13:58:28.847045+00:00",
       "company_id": "co_ооо_строймонтаж"
     },
     {
-      "id": "6776367a",
-      "company_name": "ООО Альфа-Логистика",
+      "id": "2ddcfcee",
+      "company_name": "ООО НеваСтройСервис",
       "inn": null,
       "source": "zakupki",
       "event_type": "new_procurement",
-      "event_description": "Закупка №0373803713: модернизация системы видеонаблюдения",
+      "event_description": "Закупка №0373874408: строительство инженерных сетей",
       "amount": 45000000,
-      "detected_at": "2026-07-16T08:10:03.416180+00:00",
-      "company_id": "co_ооо_альфа_логистика"
+      "detected_at": "2026-07-15T15:58:28.847045+00:00",
+      "company_id": "co_ооо_невастройсервис"
     },
     {
       "id": "beef58a3",
@@ -195,7 +283,7 @@
       "event_type": "court_case",
       "event_description": "Арбитражное дело: спор о возмещении ущерба",
       "amount": 35000000,
-      "detected_at": "2026-07-14T14:10:03.417159+00:00",
+      "detected_at": "2026-07-16T07:58:28.847282+00:00",
       "company_id": "co_пао_альфакапитал"
     },
     {
@@ -206,74 +294,52 @@
       "event_type": "court_case",
       "event_description": "Арбитражное дело: спор о возмещении ущерба",
       "amount": 35000000,
-      "detected_at": "2026-07-12T06:10:03.417159+00:00",
+      "detected_at": "2026-07-15T10:58:28.847282+00:00",
       "company_id": "co_ао_газтранзит"
     },
     {
-      "id": "b05af4ef",
-      "company_name": "АО ТехноЛайн",
+      "id": "4e32d6fd",
+      "company_name": "ООО Инвест-Групп",
+      "inn": null,
+      "source": "zakupki",
+      "event_type": "new_procurement",
+      "event_description": "Закупка №0373348996: поставка медицинских изделий",
+      "amount": 25000000,
+      "detected_at": "2026-07-15T16:58:28.847045+00:00",
+      "company_id": "co_ооо_инвест_групп"
+    },
+    {
+      "id": "8a808f91",
+      "company_name": "ЗАО МеталлТрейд",
+      "inn": null,
+      "source": "kontur_zakupki",
+      "event_type": "new_procurement",
+      "event_description": "Закупка: Поставка серверного оборудования",
+      "amount": 25000000,
+      "detected_at": "2026-07-14T20:58:28.847621+00:00",
+      "company_id": "co_зао_металлтрейд"
+    },
+    {
+      "id": "d7217752",
+      "company_name": "ООО НеваИнвест",
       "inn": null,
       "source": "kad_arbitr",
       "event_type": "court_case",
-      "event_description": "Арбитражное дело: спор о возмещении ущерба",
-      "amount": 35000000,
-      "detected_at": "2026-07-12T15:10:03.417159+00:00",
-      "company_id": "co_ао_технолайн"
+      "event_description": "Арбитражное дело: банкротство физического лица (поручитель)",
+      "amount": 15000000,
+      "detected_at": "2026-07-12T05:58:28.847282+00:00",
+      "company_id": "co_ооо_неваинвест"
     },
     {
-      "id": "38a7a1bf",
-      "company_name": "ЗАО \"ПромХолдинг\"",
+      "id": "5650d5a8",
+      "company_name": "ЗАО УралМаш",
       "inn": null,
-      "source": "egrul_changes",
-      "event_type": "capital_change",
-      "event_description": "Уменьшение уставного капитала",
-      "amount": 25000000,
-      "detected_at": "2026-07-15T22:10:06.526145+00:00",
-      "company_id": "co_зао__промхолдинг_"
-    },
-    {
-      "id": "ccd42220",
-      "company_name": "ПАО \"УралДевелопмент\"",
-      "inn": null,
-      "source": "egrul_changes",
-      "event_type": "capital_change",
-      "event_description": "Увеличение уставного капитала",
-      "amount": 25000000,
-      "detected_at": "2026-07-11T03:10:06.526145+00:00",
-      "company_id": "co_пао__уралдевелопмент_"
-    },
-    {
-      "id": "ae9f3cbf",
-      "company_name": "ПАО \"ВекторАльянс\"",
-      "inn": null,
-      "source": "egrul_changes",
-      "event_type": "capital_change",
-      "event_description": "Увеличение уставного капитала",
-      "amount": 25000000,
-      "detected_at": "2026-07-15T09:10:06.526145+00:00",
-      "company_id": "co_пао__векторальянс_"
-    },
-    {
-      "id": "b303b1e7",
-      "company_name": "ПАО \"СтройТехнологии\"",
-      "inn": null,
-      "source": "egrul_changes",
-      "event_type": "capital_change",
-      "event_description": "Уменьшение уставного капитала",
-      "amount": 25000000,
-      "detected_at": "2026-07-16T12:10:06.526145+00:00",
-      "company_id": "co_пао__стройтехнологии_"
-    },
-    {
-      "id": "1095cb50",
-      "company_name": "ООО НефтеГазСервис",
-      "inn": null,
-      "source": "fns",
-      "event_type": "capital_change",
-      "event_description": "ФНС: изменение уставного капитала",
-      "amount": 25000000,
-      "detected_at": "2026-07-11T23:10:06.526570+00:00",
-      "company_id": "co_ооо_нефтегазсервис"
+      "source": "kad_arbitr",
+      "event_type": "court_case",
+      "event_description": "Арбитражное дело: банкротство физического лица (поручитель)",
+      "amount": 15000000,
+      "detected_at": "2026-07-14T15:58:28.847282+00:00",
+      "company_id": "co_зао_уралмаш"
     },
     {
       "id": "6935c89e",
@@ -283,327 +349,261 @@
       "event_type": "court_case",
       "event_description": "Арбитражное дело: банкротство физического лица (поручитель)",
       "amount": 15000000,
-      "detected_at": "2026-07-14T23:10:03.417159+00:00",
+      "detected_at": "2026-07-14T01:58:28.847282+00:00",
       "company_id": "co_ооо_сибурнефть"
     },
     {
-      "id": "18f07a9f",
-      "company_name": "ООО КубаньАгро",
-      "inn": null,
-      "source": "kad_arbitr",
-      "event_type": "court_case",
-      "event_description": "Арбитражное дело: банкротство физического лица (поручитель)",
-      "amount": 15000000,
-      "detected_at": "2026-07-15T13:10:03.417159+00:00",
-      "company_id": "co_ооо_кубаньагро"
-    },
-    {
-      "id": "2c7f69e4",
-      "company_name": "ООО АгроХолдинг",
+      "id": "9808ab7f",
+      "company_name": "АО ПищеТорг",
       "inn": null,
       "source": "kontur_zakupki",
       "event_type": "new_procurement",
       "event_description": "Закупка: Разработка информационной системы",
       "amount": 15000000,
-      "detected_at": "2026-07-16T01:10:03.418570+00:00",
-      "company_id": "co_ооо_агрохолдинг"
+      "detected_at": "2026-07-14T01:58:28.847621+00:00",
+      "company_id": "co_ао_пищеторг"
     },
     {
-      "id": "cfc88255",
+      "id": "81cb1ddf",
       "company_name": "ООО ИТ-Решения",
       "inn": null,
       "source": "kontur_zakupki",
       "event_type": "new_procurement",
-      "event_description": "Закупка: Поставка строительных материалов",
-      "amount": 12000000,
-      "detected_at": "2026-07-16T03:10:03.418570+00:00",
+      "event_description": "Закупка: Разработка информационной системы",
+      "amount": 15000000,
+      "detected_at": "2026-07-14T16:58:28.847621+00:00",
       "company_id": "co_ооо_ит_решения"
     },
     {
-      "id": "c3a9cc25",
-      "company_name": "ООО ДорСтройМонтаж",
+      "id": "744a0a2f",
+      "company_name": "ПАО АвтоЛизинг",
       "inn": null,
       "source": "kontur_zakupki",
       "event_type": "new_procurement",
       "event_description": "Закупка: Поставка строительных материалов",
       "amount": 12000000,
-      "detected_at": "2026-07-14T13:10:03.418570+00:00",
-      "company_id": "co_ооо_дорстроймонтаж"
+      "detected_at": "2026-07-15T12:58:28.847621+00:00",
+      "company_id": "co_пао_автолизинг"
     },
     {
-      "id": "7a04b8d5",
-      "company_name": "ПАО Норникель",
+      "id": "619ad376",
+      "company_name": "ЗАО Инвест-Капитал",
       "inn": null,
-      "source": "e_disclosure",
+      "source": "fns",
       "event_type": "capital_change",
-      "event_description": "Раскрытие: ПАО Норникель — Существенное изменение размера уставного капитала",
+      "event_description": "ФНС: реорганизация (слияние)",
       "amount": 10000000,
-      "detected_at": "2026-07-13T13:10:03.417510+00:00",
-      "company_id": "co_пао_норникель"
+      "detected_at": "2026-07-15T16:58:30.503567+00:00",
+      "company_id": "co_зао_инвест_капитал"
     },
     {
-      "id": "508dbd83",
-      "company_name": "ПАО ТелеКомГрупп",
+      "id": "31ec7d54",
+      "company_name": "ООО АгроХолдинг",
+      "inn": null,
+      "source": "kontur_zakupki",
+      "event_type": "new_procurement",
+      "event_description": "Закупка: Оказание услуг по техническому обслуживанию",
+      "amount": 8500000,
+      "detected_at": "2026-07-13T07:58:28.847621+00:00",
+      "company_id": "co_ооо_агрохолдинг"
+    },
+    {
+      "id": "395b02b9",
+      "company_name": "ЗАО ФармДистрибьюшен",
       "inn": null,
       "source": "kontur_zakupki",
       "event_type": "new_procurement",
       "event_description": "Закупка: Оказание транспортных услуг",
       "amount": 6000000,
-      "detected_at": "2026-07-13T10:10:03.418570+00:00",
-      "company_id": "co_пао_телекомгрупп"
+      "detected_at": "2026-07-15T12:58:28.847621+00:00",
+      "company_id": "co_зао_фармдистрибьюшен"
     },
     {
-      "id": "503968cc",
-      "company_name": "АО ПромКапитал",
+      "id": "0b0964f4",
+      "company_name": "ПАО ГазЭнерго",
+      "inn": null,
+      "source": "zakupki",
+      "event_type": "new_procurement",
+      "event_description": "Закупка №0373349769: оказание услуг по техническому обслуживанию",
+      "amount": 5000000,
+      "detected_at": "2026-07-15T14:58:28.847045+00:00",
+      "company_id": "co_пао_газэнерго"
+    },
+    {
+      "id": "7e3d36f0",
+      "company_name": "ООО Сибирские Технологии",
+      "inn": null,
+      "source": "zakupki",
+      "event_type": "new_procurement",
+      "event_description": "Закупка №0373394337: оказание услуг по техническому обслуживанию",
+      "amount": 5000000,
+      "detected_at": "2026-07-16T00:58:28.847045+00:00",
+      "company_id": "co_ооо_сибирские_технологии"
+    },
+    {
+      "id": "780346ac",
+      "company_name": "ООО ВостокМонтаж",
       "inn": null,
       "source": "fedresurs",
       "event_type": "capital_change",
-      "event_description": "Федресурс: АО ПромКапитал — Изменение размера уставного капитала",
+      "event_description": "Федресурс: ООО ВостокМонтаж — Изменение размера уставного капитала",
       "amount": 5000000,
-      "detected_at": "2026-07-15T07:10:03.417322+00:00",
-      "company_id": "co_ао_промкапитал"
+      "detected_at": "2026-07-13T12:58:28.847377+00:00",
+      "company_id": "co_ооо_востокмонтаж"
     },
     {
-      "id": "c7f46814",
-      "company_name": "ЗАО \"КубаньЭнерго\"",
+      "id": "c7e86346",
+      "company_name": "ООО СтройИнвест",
+      "inn": null,
+      "source": "fedresurs",
+      "event_type": "capital_change",
+      "event_description": "Федресурс: ООО СтройИнвест — Изменение размера уставного капитала",
+      "amount": 5000000,
+      "detected_at": "2026-07-15T16:58:28.847377+00:00",
+      "company_id": "co_ооо_стройинвест"
+    },
+    {
+      "id": "53a51b3a",
+      "company_name": "АО \"ТрансГрупп\"",
       "inn": null,
       "source": "egrul_changes",
       "event_type": "capital_change",
       "event_description": "Уменьшение уставного капитала",
       "amount": 5000000,
-      "detected_at": "2026-07-12T09:10:06.526145+00:00",
-      "company_id": "co_зао__кубаньэнерго_"
+      "detected_at": "2026-07-12T17:58:30.503094+00:00",
+      "company_id": "co_ао__трансгрупп_"
     },
     {
-      "id": "d725f818",
-      "company_name": "ЗАО \"ТехноГрупп\"",
+      "id": "a085e86d",
+      "company_name": "АО \"СибирьГрупп\"",
       "inn": null,
-      "source": "egrul",
-      "event_type": "new_registration",
-      "event_description": "Регистрация нового юрлица, УК: 5,000,000 ₽",
-      "amount": 5000000,
-      "detected_at": "2026-07-14T14:10:06.526420+00:00",
-      "company_id": "co_зао__техногрупп_"
-    },
-    {
-      "id": "eb6b2c03",
-      "company_name": "ООО \"СибирьЛогистик\"",
-      "inn": null,
-      "source": "egrul",
-      "event_type": "new_registration",
-      "event_description": "Регистрация нового юрлица, УК: 5,000,000 ₽",
-      "amount": 5000000,
-      "detected_at": "2026-07-16T00:10:06.526420+00:00",
-      "company_id": "co_ооо__сибирьлогистик_"
-    },
-    {
-      "id": "72771d74",
-      "company_name": "ООО Вектор",
-      "inn": null,
-      "source": "fns",
+      "source": "egrul_changes",
       "event_type": "capital_change",
-      "event_description": "ФНС: изменение уставного капитала",
+      "event_description": "Уменьшение уставного капитала",
       "amount": 5000000,
-      "detected_at": "2026-07-16T09:10:06.526570+00:00",
-      "company_id": "co_ооо_вектор"
+      "detected_at": "2026-07-13T09:58:30.503094+00:00",
+      "company_id": "co_ао__сибирьгрупп_"
     },
     {
-      "id": "dc090664",
-      "company_name": "ЗАО Инвест-Капитал",
+      "id": "e886c7e2",
+      "company_name": "ЗАО \"НеоТрейд\"",
+      "inn": null,
+      "source": "egrul",
+      "event_type": "new_registration",
+      "event_description": "Регистрация нового юрлица, УК: 5,000,000 ₽",
+      "amount": 5000000,
+      "detected_at": "2026-07-14T12:58:30.503430+00:00",
+      "company_id": "co_зао__неотрейд_"
+    },
+    {
+      "id": "7306bde1",
+      "company_name": "ООО \"ТехноСтрой\"",
+      "inn": null,
+      "source": "egrul",
+      "event_type": "new_registration",
+      "event_description": "Регистрация нового юрлица, УК: 5,000,000 ₽",
+      "amount": 5000000,
+      "detected_at": "2026-07-15T14:58:30.503430+00:00",
+      "company_id": "co_ооо__технострой_"
+    },
+    {
+      "id": "0d049c30",
+      "company_name": "ООО НефтеГазСервис",
       "inn": null,
       "source": "fns",
       "event_type": "court_case",
       "event_description": "ФНС: ликвидация юридического лица",
       "amount": 5000000,
-      "detected_at": "2026-07-13T23:10:06.526570+00:00",
-      "company_id": "co_зао_инвест_капитал"
+      "detected_at": "2026-07-16T06:58:30.503567+00:00",
+      "company_id": "co_ооо_нефтегазсервис"
     },
     {
-      "id": "06739446",
-      "company_name": "ООО НеваИнвест",
+      "id": "b2f3064a",
+      "company_name": "АО МегаПолис",
       "inn": null,
-      "source": "kad_arbitr",
+      "source": "fns",
       "event_type": "court_case",
-      "event_description": "Арбитражное дело: спор о взыскании арендной платы",
-      "amount": 2000000,
-      "detected_at": "2026-07-16T09:10:03.417159+00:00",
-      "company_id": "co_ооо_неваинвест"
+      "event_description": "ФНС: ликвидация юридического лица",
+      "amount": 5000000,
+      "detected_at": "2026-07-15T18:58:30.503567+00:00",
+      "company_id": "co_ао_мегаполис"
     },
     {
-      "id": "53d47249",
-      "company_name": "ЗАО \"ГлобалСервис\"",
+      "id": "22c924ac",
+      "company_name": "ООО Альфа-Логистика",
+      "inn": null,
+      "source": "zakupki",
+      "event_type": "new_procurement",
+      "event_description": "Закупка №0373493142: модернизация системы видеонаблюдения",
+      "amount": 3500000,
+      "detected_at": "2026-07-15T07:58:28.847045+00:00",
+      "company_id": "co_ооо_альфа_логистика"
+    },
+    {
+      "id": "15863545",
+      "company_name": "ООО ВолгаТрейд",
+      "inn": null,
+      "source": "zakupki",
+      "event_type": "new_procurement",
+      "event_description": "Закупка №0373963552: выполнение работ по благоустройству",
+      "amount": 1200000,
+      "detected_at": "2026-07-14T22:58:28.847045+00:00",
+      "company_id": "co_ооо_волгатрейд"
+    },
+    {
+      "id": "8bb59872",
+      "company_name": "АО ТехноПром",
+      "inn": null,
+      "source": "zakupki",
+      "event_type": "new_procurement",
+      "event_description": "Закупка №0373255466: разработка проектной документации",
+      "amount": 1200000,
+      "detected_at": "2026-07-16T05:58:28.847045+00:00",
+      "company_id": "co_ао_технопром"
+    },
+    {
+      "id": "08d6a01d",
+      "company_name": "ООО УралПроджект",
+      "inn": null,
+      "source": "fedresurs",
+      "event_type": "capital_change",
+      "event_description": "Федресурс: ООО УралПроджект — Изменение размера уставного капитала",
+      "amount": 1000000,
+      "detected_at": "2026-07-11T23:58:28.847377+00:00",
+      "company_id": "co_ооо_уралпроджект"
+    },
+    {
+      "id": "b73c5455",
+      "company_name": "ЗАО \"РосАльянс\"",
       "inn": null,
       "source": "egrul_changes",
       "event_type": "capital_change",
       "event_description": "Увеличение уставного капитала",
       "amount": 1000000,
-      "detected_at": "2026-07-11T23:10:06.526145+00:00",
-      "company_id": "co_зао__глобалсервис_"
+      "detected_at": "2026-07-12T09:58:30.503094+00:00",
+      "company_id": "co_зао__росальянс_"
     },
     {
-      "id": "dcfb0b79",
-      "company_name": "ЗАО \"УралДевелопмент\"",
+      "id": "44be9b43",
+      "company_name": "ЗАО \"УралСервис\"",
       "inn": null,
       "source": "egrul_changes",
       "event_type": "new_registration",
       "event_description": "Новое юрлицо, УК: 1,000,000 ₽",
       "amount": 1000000,
-      "detected_at": "2026-07-15T05:10:06.526145+00:00",
-      "company_id": "co_зао__уралдевелопмент_"
+      "detected_at": "2026-07-11T13:58:30.503094+00:00",
+      "company_id": "co_зао__уралсервис_"
     },
     {
-      "id": "f15d283c",
-      "company_name": "АО \"ПромСтрой\"",
+      "id": "9f44ffd2",
+      "company_name": "ПАО \"РосТрейд\"",
       "inn": null,
       "source": "egrul_changes",
       "event_type": "capital_change",
       "event_description": "Увеличение уставного капитала",
       "amount": 1000000,
-      "detected_at": "2026-07-14T09:10:06.526145+00:00",
-      "company_id": "co_ао__промстрой_"
-    },
-    {
-      "id": "0c45a6e5",
-      "company_name": "АО \"ПромИнвест\"",
-      "inn": null,
-      "source": "egrul_changes",
-      "event_type": "capital_change",
-      "event_description": "Увеличение уставного капитала",
-      "amount": 1000000,
-      "detected_at": "2026-07-13T01:10:06.526145+00:00",
-      "company_id": "co_ао__проминвест_"
-    },
-    {
-      "id": "e88bb111",
-      "company_name": "ООО \"ВолгаХолдинг\"",
-      "inn": null,
-      "source": "egrul",
-      "event_type": "new_registration",
-      "event_description": "Регистрация нового юрлица, УК: 1,000,000 ₽",
-      "amount": 1000000,
-      "detected_at": "2026-07-15T23:10:06.526420+00:00",
-      "company_id": "co_ооо__волгахолдинг_"
-    },
-    {
-      "id": "9e7873cc",
-      "company_name": "ООО \"АльфаКапитал\"",
-      "inn": null,
-      "source": "egrul",
-      "event_type": "new_registration",
-      "event_description": "Регистрация нового юрлица, УК: 1,000,000 ₽",
-      "amount": 1000000,
-      "detected_at": "2026-07-14T04:10:06.526420+00:00",
-      "company_id": "co_ооо__альфакапитал_"
-    },
-    {
-      "id": "713b585f",
-      "company_name": "ООО \"БетаИнвест\"",
-      "inn": null,
-      "source": "egrul",
-      "event_type": "new_registration",
-      "event_description": "Регистрация нового юрлица, УК: 1,000,000 ₽",
-      "amount": 1000000,
-      "detected_at": "2026-07-15T05:10:06.526420+00:00",
-      "company_id": "co_ооо__бетаинвест_"
-    },
-    {
-      "id": "f2c1906c",
-      "company_name": "ЗАО \"НеоСервис\"",
-      "inn": null,
-      "source": "egrul",
-      "event_type": "new_registration",
-      "event_description": "Регистрация нового юрлица, УК: 1,000,000 ₽",
-      "amount": 1000000,
-      "detected_at": "2026-07-14T05:10:06.526420+00:00",
-      "company_id": "co_зао__неосервис_"
-    },
-    {
-      "id": "57b1576d",
-      "company_name": "ЗАО \"ВолгаСервис\"",
-      "inn": null,
-      "source": "egrul",
-      "event_type": "new_registration",
-      "event_description": "Регистрация нового юрлица, УК: 1,000,000 ₽",
-      "amount": 1000000,
-      "detected_at": "2026-07-14T04:10:06.526420+00:00",
-      "company_id": "co_зао__волгасервис_"
-    },
-    {
-      "id": "f48cb29c",
-      "company_name": "ООО НеваСтройСервис",
-      "inn": null,
-      "source": "zakupki",
-      "event_type": "new_procurement",
-      "event_description": "Закупка №0373725128: оказание транспортных услуг",
-      "amount": 900000,
-      "detected_at": "2026-07-15T06:10:03.416180+00:00",
-      "company_id": "co_ооо_невастройсервис"
-    },
-    {
-      "id": "d6f33f6b",
-      "company_name": "ООО ПромТех",
-      "inn": null,
-      "source": "kad_arbitr",
-      "event_type": "court_case",
-      "event_description": "Арбитражное дело: расторжение договора поставки",
-      "amount": 800000,
-      "detected_at": "2026-07-14T19:10:03.417159+00:00",
-      "company_id": "co_ооо_промтех"
-    },
-    {
-      "id": "4fb2e9e9",
-      "company_name": "АО ДальВостокРазвитие",
-      "inn": null,
-      "source": "zakupki",
-      "event_type": "new_procurement",
-      "event_description": "Закупка №0373827873: строительство инженерных сетей",
-      "amount": 500000,
-      "detected_at": "2026-07-14T07:10:03.416180+00:00",
-      "company_id": "co_ао_дальвостокразвитие"
-    },
-    {
-      "id": "f8846e51",
-      "company_name": "ООО \"РосКапитал\"",
-      "inn": null,
-      "source": "egrul_changes",
-      "event_type": "capital_change",
-      "event_description": "Уменьшение уставного капитала",
-      "amount": 500000,
-      "detected_at": "2026-07-13T23:10:06.526145+00:00",
-      "company_id": "co_ооо__роскапитал_"
-    },
-    {
-      "id": "cd6bb06f",
-      "company_name": "ЗАО \"ВекторАльянс\"",
-      "inn": null,
-      "source": "egrul_changes",
-      "event_type": "capital_change",
-      "event_description": "Уменьшение уставного капитала",
-      "amount": 500000,
-      "detected_at": "2026-07-15T22:10:06.526145+00:00",
-      "company_id": "co_зао__векторальянс_"
-    },
-    {
-      "id": "916f5f8c",
-      "company_name": "ООО \"КубаньДевелопмент\"",
-      "inn": null,
-      "source": "egrul_changes",
-      "event_type": "new_registration",
-      "event_description": "Новое юрлицо, УК: 100,000 ₽",
-      "amount": 100000,
-      "detected_at": "2026-07-12T08:10:06.526145+00:00",
-      "company_id": "co_ооо__кубаньдевелопмент_"
-    },
-    {
-      "id": "0d61d76c",
-      "company_name": "ЗАО \"БетаИнвест\"",
-      "inn": null,
-      "source": "egrul",
-      "event_type": "new_registration",
-      "event_description": "Регистрация нового юрлица, УК: 100,000 ₽",
-      "amount": 100000,
-      "detected_at": "2026-07-16T03:10:06.526420+00:00",
-      "company_id": "co_зао__бетаинвест_"
+      "detected_at": "2026-07-13T18:58:30.503094+00:00",
+      "company_id": "co_пао__рострейд_"
     }
   ]
 }

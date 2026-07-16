@@ -1,73 +1,85 @@
 {
-  "scanned_at": "2026-07-16T14:49:42.847709+00:00",
-  "raw_count": 562,
-  "unique_count": 127,
-  "filtered_count": 44,
   "top5": [
     {
-      "id": "b80f9238",
-      "company_name": "ООО Альфа-Логистика",
-      "source": "zakupki",
-      "event_type": "new_procurement",
-      "event_description": "Закупка №0373306390: разработка проектной документации",
-      "amount": 150000000,
-      "detected_at": "2026-07-15T02:49:39.743029+00:00",
-      "weight": 10,
-      "products": "Банковские гарантии, кредитование",
-      "event_name": "Новая закупка",
-      "amount_str": "150.0 млн ₽"
+      "company_name": "ПАО Норникель",
+      "source": "e_disclosure",
+      "event_type": "capital_change",
+      "event_description": "Раскрытие: ПАО Норникель — Решение о дроблении акций",
+      "amount": 1000000000,
+      "weight": 12,
+      "products": [
+        "Кредитование",
+        "РКО",
+        "ВЭД"
+      ],
+      "industry": "Металлургия",
+      "detected_at": "2026-07-16T07:42:52.099603+00:00",
+      "company_id": "co_пао_норникель"
     },
     {
-      "id": "be0afc19",
-      "company_name": "АО ДальВостокРазвитие",
-      "source": "zakupki",
-      "event_type": "new_procurement",
-      "event_description": "Закупка №0373501335: капитальный ремонт фасада здания",
-      "amount": 150000000,
-      "detected_at": "2026-07-14T09:49:39.743029+00:00",
-      "weight": 10,
-      "products": "Банковские гарантии, кредитование",
-      "event_name": "Новая закупка",
-      "amount_str": "150.0 млн ₽"
+      "company_name": "ПАО Газпром",
+      "source": "e_disclosure",
+      "event_type": "capital_change",
+      "event_description": "Раскрытие: ПАО Газпром — Увеличение уставного капитала путём допэмиссии",
+      "amount": 500000000,
+      "weight": 12,
+      "products": [
+        "Кредитование",
+        "РКО",
+        "ВЭД"
+      ],
+      "industry": "Нефтегаз",
+      "detected_at": "2026-07-16T05:42:52.099603+00:00",
+      "company_id": "co_пао_газпром"
     },
     {
-      "id": "ade8ccdf",
-      "company_name": "ООО Инвест-Групп",
-      "source": "zakupki",
-      "event_type": "new_procurement",
-      "event_description": "Закупка №0373474895: разработка проектной документации",
-      "amount": 150000000,
-      "detected_at": "2026-07-14T23:49:39.743029+00:00",
+      "company_name": "ПАН Алроса",
+      "source": "e_disclosure",
+      "event_type": "capital_change",
+      "event_description": "Раскрытие: ПАН Алроса — Решение о консолидации акций",
+      "amount": 1000000000,
       "weight": 10,
-      "products": "Банковские гарантии, кредитование",
-      "event_name": "Новая закупка",
-      "amount_str": "150.0 млн ₽"
+      "products": [
+        "Кредитование",
+        "РКО",
+        "ВЭД"
+      ],
+      "industry": "Металлургия",
+      "detected_at": "2026-07-12T18:42:52.099603+00:00",
+      "company_id": "co_пан_алроса"
     },
     {
-      "id": "9f0377e0",
-      "company_name": "ПАО ТелеКомГрупп",
-      "source": "kontur_zakupki",
-      "event_type": "new_procurement",
-      "event_description": "Закупка: Реконструкция инженерных сетей",
-      "amount": 60000000,
-      "detected_at": "2026-07-16T09:49:39.744416+00:00",
+      "company_name": "ПАО МТС",
+      "source": "e_disclosure",
+      "event_type": "capital_change",
+      "event_description": "Раскрытие: ПАО МТС — Увеличение уставного капитала путём допэмиссии",
+      "amount": 50000000,
       "weight": 10,
-      "products": "Банковские гарантии, кредитование",
-      "event_name": "Новая закупка",
-      "amount_str": "60.0 млн ₽"
+      "products": [
+        "Кредитование",
+        "РКО"
+      ],
+      "industry": "Телеком/ИТ",
+      "detected_at": "2026-07-16T06:42:52.099603+00:00",
+      "company_id": "co_пао_мтс"
     },
     {
-      "id": "ad5f6e6d",
-      "company_name": "ООО ПромТехноСервис",
-      "source": "kontur_zakupki",
-      "event_type": "new_procurement",
-      "event_description": "Закупка: Капитальный ремонт производственного здания",
-      "amount": 180000000,
-      "detected_at": "2026-07-12T14:49:39.744416+00:00",
+      "company_name": "ЗАО \"АльфаХолдинг\"",
+      "source": "egrul_changes",
+      "event_type": "capital_change",
+      "event_description": "Увеличение уставного капитала",
+      "amount": 100000000,
       "weight": 9,
-      "products": "Банковские гарантии, кредитование",
-      "event_name": "Новая закупка",
-      "amount_str": "180.0 млн ₽"
+      "products": [
+        "Кредитование",
+        "РКО"
+      ],
+      "industry": "Телеком/ИТ",
+      "detected_at": "2026-07-12T10:42:54.594734+00:00",
+      "company_id": "co_зао__альфахолдинг_"
     }
-  ]
+  ],
+  "all_scored_count": 41,
+  "raw_count": 565,
+  "unique_count": 126
 }
