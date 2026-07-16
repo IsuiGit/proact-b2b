@@ -1,8 +1,5 @@
 {
   "scanned_at": "2026-07-16T14:49:42.847709+00:00",
-  "raw_count": 562,
-  "unique_count": 127,
-  "filtered_count": 44,
   "top5": [
     {
       "id": "b80f9238",
@@ -15,7 +12,9 @@
       "weight": 10,
       "products": "Банковские гарантии, кредитование",
       "event_name": "Новая закупка",
-      "amount_str": "150.0 млн ₽"
+      "amount_str": "150.0 млн ₽",
+      "confidence": 79,
+      "risk": "Низкий"
     },
     {
       "id": "be0afc19",
@@ -28,20 +27,9 @@
       "weight": 10,
       "products": "Банковские гарантии, кредитование",
       "event_name": "Новая закупка",
-      "amount_str": "150.0 млн ₽"
-    },
-    {
-      "id": "ade8ccdf",
-      "company_name": "ООО Инвест-Групп",
-      "source": "zakupki",
-      "event_type": "new_procurement",
-      "event_description": "Закупка №0373474895: разработка проектной документации",
-      "amount": 150000000,
-      "detected_at": "2026-07-14T23:49:39.743029+00:00",
-      "weight": 10,
-      "products": "Банковские гарантии, кредитование",
-      "event_name": "Новая закупка",
-      "amount_str": "150.0 млн ₽"
+      "amount_str": "150.0 млн ₽",
+      "confidence": 79,
+      "risk": "Низкий"
     },
     {
       "id": "9f0377e0",
@@ -54,7 +42,24 @@
       "weight": 10,
       "products": "Банковские гарантии, кредитование",
       "event_name": "Новая закупка",
-      "amount_str": "60.0 млн ₽"
+      "amount_str": "60.0 млн ₽",
+      "confidence": 79,
+      "risk": "Низкий"
+    },
+    {
+      "id": "ade8ccdf",
+      "company_name": "ООО Инвест-Групп",
+      "source": "zakupki",
+      "event_type": "new_procurement",
+      "event_description": "Закупка №0373474895: разработка проектной документации",
+      "amount": 150000000,
+      "detected_at": "2026-07-14T23:49:39.743029+00:00",
+      "weight": 10,
+      "products": "Банковские гарантии, кредитование",
+      "event_name": "Новая закупка",
+      "amount_str": "150.0 млн ₽",
+      "confidence": 71,
+      "risk": "Низкий"
     },
     {
       "id": "ad5f6e6d",
@@ -67,7 +72,9 @@
       "weight": 9,
       "products": "Банковские гарантии, кредитование",
       "event_name": "Новая закупка",
-      "amount_str": "180.0 млн ₽"
+      "amount_str": "180.0 млн ₽",
+      "confidence": 64,
+      "risk": "Низкий"
     }
   ]
 }
