@@ -1,0 +1,67 @@
+[
+  {
+    "id": "396776a4",
+    "company_name": "ПАО Роснефть",
+    "inn": null,
+    "source": "e_disclosure",
+    "event_type": "capital_change",
+    "event_description": "Раскрытие: ПАО Роснефть — Решение о консолидации акций",
+    "amount": 1000000000,
+    "detected_at": "2026-07-12T04:10:03.417510+00:00",
+    "company_id": "co_пао_роснефть",
+    "_weight": 10,
+    "_products": "Кредитование, РКО"
+  },
+  {
+    "id": "c74540d5",
+    "company_name": "АО КубаньНефть",
+    "inn": null,
+    "source": "fedresurs",
+    "event_type": "capital_change",
+    "event_description": "Федресурс: АО КубаньНефть — Изменение размера уставного капитала",
+    "amount": 100000000,
+    "detected_at": "2026-07-14T01:10:03.417322+00:00",
+    "company_id": "co_ао_кубаньнефть",
+    "_weight": 10,
+    "_products": "Кредитование, РКО"
+  },
+  {
+    "id": "ca5e2fd7",
+    "company_name": "АО ЛогистикПро",
+    "inn": null,
+    "source": "kontur_zakupki",
+    "event_type": "new_procurement",
+    "event_description": "Закупка: Строительство логистического центра",
+    "amount": 350000000,
+    "detected_at": "2026-07-14T09:10:03.418570+00:00",
+    "company_id": "co_ао_логистикпро",
+    "_weight": 9,
+    "_products": "Банковские гарантии, кредитование"
+  },
+  {
+    "id": "c83566fe",
+    "company_name": "АО \"СберСтрой\"",
+    "inn": null,
+    "source": "egrul_changes",
+    "event_type": "capital_change",
+    "event_description": "Увеличение уставного капитала",
+    "amount": 100000000,
+    "detected_at": "2026-07-10T19:10:06.526145+00:00",
+    "company_id": "co_ао__сберстрой_",
+    "_weight": 9,
+    "_products": "Кредитование, РКО"
+  },
+  {
+    "id": "629863d2",
+    "company_name": "АО ЭнергоСнаб",
+    "inn": null,
+    "source": "kontur_zakupki",
+    "event_type": "new_procurement",
+    "event_description": "Закупка: Поставка нефтепродуктов",
+    "amount": 95000000,
+    "detected_at": "2026-07-13T17:10:03.418570+00:00",
+    "company_id": "co_ао_энергоснаб",
+    "_weight": 8,
+    "_products": "Банковские гарантии, кредитование"
+  }
+]
