@@ -45,6 +45,8 @@ from sources.egrul_changes import EgrulChangesFetcher
 from sources.mock_egrul import MockEgrulFetcher
 from sources.mock_fns import MockFnsFetcher
 from sources.mock_hh import MockHHFetcher
+from sources.mock_nashdom_rf import MockNashdomRFFetcher
+from sources.mock_project_registry import MockProjectRegistryFetcher
 
 
 def get_fetchers() -> list[BaseFetcher]:
@@ -59,6 +61,8 @@ def get_fetchers() -> list[BaseFetcher]:
         MockEgrulFetcher(),
         MockFnsFetcher(),
         MockHHFetcher(),
+        MockNashdomRFFetcher(),
+        MockProjectRegistryFetcher(),
     ]
 
 
