@@ -84,6 +84,8 @@ def main() -> None:
                         help="Hybrid mode: SCOUT+TRACKER local, ANALYST/BRIEF/WARMUP via LLM subagents")
     parser.add_argument("--smart-collect", action="store_true",
                         help="Collect subagent output files, sanitize, split analyst/brief, run tracker")
+    parser.add_argument("--file", action="store_true",
+                        help="Generate styled HTML report from pipeline output and save to reports/")
     args = parser.parse_args()
 
     # ── Handle --smart (local SCOUT → raw JSON for parent LLM analysis) ──
@@ -188,6 +190,13 @@ def main() -> None:
                 print(f"COLLECT_{stage.upper()}:{path}")
 
         print(f"SMART_COLLECT_DONE:{_OUT}")
+
+        # ── Generate HTML report if --file ──
+        if args.file:
+            from html_generator import generate_report
+            report_path = generate_report(_OUT)
+            print(f"HTML_REPORT_READY:{report_path}")
+
         return
 
     # ── Handle --result (record contact and exit) ─────────────────
