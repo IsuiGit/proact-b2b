@@ -39,6 +39,7 @@ background:var(--blue-dim);border:1px solid var(--blue-border);padding:2px 9px;b
 .badge-green{background:var(--green-dim);border:1px solid var(--green-border);color:var(--green)}
 .badge-blue{background:var(--blue-dim);border:1px solid var(--blue-border);color:var(--blue)}
 .badge-red{background:rgba(248,81,73,0.10);border:1px solid rgba(248,81,73,0.25);color:var(--red)}
+.badge-yellow{background:rgba(210,153,34,0.12);border:1px solid rgba(210,153,34,0.30);color:#d29922}
 .ts{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3)}
 .page{max-width:900px;margin:0 auto;padding:22px 28px 52px}
 .hero{background:linear-gradient(135deg,#0d1f3c 0%,#1a0d2e 100%);border:1px solid var(--border2);
@@ -359,7 +360,7 @@ def _render_checklist(checklist: list) -> str:
     if not checklist:
         return ""
     parts = [f'<li><div class="cb-box"></div>{_esc(item)}</li>' for item in checklist]
-    return f"""<div class="card"><div class="ch" style="color:#3fb950;">📎 Взять на встречу</div>
+    return f"""<div class="card"><div class="ch" style="color:#3fb950;">📎 Рекомендации по проведению встречи</div>
 <div class="cb"><ul class="cl">{"".join(parts)}</ul></div></div>"""
 
 
@@ -374,6 +375,11 @@ def render_brief(data: dict) -> str:
     location = _esc(data.get("location", ""))
     score = data.get("score", 0)
     is_sber_client = data.get("is_sber_client", False)
+    client_status = data.get("client_status", "non_client" if not is_sber_client else "client")
+    website = data.get("website", "")
+    phone = data.get("phone", "")
+    years_on_market = data.get("years_on_market", "")
+    personal_contacts = data.get("personal_contacts", "")
 
     # Score ring SVG
     circumference = 2 * 3.14159 * 13  # ~81.7
@@ -390,7 +396,24 @@ def render_brief(data: dict) -> str:
         sub_parts.append(location)
     sub_html = " <span>·</span> ".join(_esc(s) for s in sub_parts)
 
-    client_badge = '<span class="badge badge-green">✓ Клиент Сбера</span>' if is_sber_client else '<span class="badge badge-red">🔴 Не клиент Сбера</span>'
+    if client_status == "client":
+        client_badge = '<span class="badge badge-green">✓ Клиент Сбера</span>'
+    elif client_status == "partial_client":
+        client_badge = '<span class="badge badge-yellow">🟡 Частично клиент Сбера</span>'
+    else:
+        client_badge = '<span class="badge badge-red">🔴 Не клиент Сбера</span>'
+
+    # Client info card (website, phone, years on market)
+    info_parts = []
+    if website:
+        info_parts.append(f'<div style="display:flex;align-items:center;gap:6px;color:var(--text2);font-size:13px;">🌐 <a href="{_esc(website)}" target="_blank" style="color:#58a6ff;text-decoration:none;">{_esc(website)}</a></div>')
+    if phone:
+        info_parts.append(f'<div style="display:flex;align-items:center;gap:6px;color:var(--text2);font-size:13px;">📞 {_esc(phone)}</div>')
+    if years_on_market:
+        info_parts.append(f'<div style="display:flex;align-items:center;gap:6px;color:var(--text2);font-size:13px;">🏢 На рынке: {_esc(years_on_market)}</div>')
+    if personal_contacts:
+        info_parts.append(f'<div style="display:flex;align-items:center;gap:6px;color:var(--text2);font-size:13px;">👤 {_esc(personal_contacts)}</div>')
+    client_info_html = '<div style="display:flex;flex-direction:column;gap:4px;margin-top:8px;">' + "".join(info_parts) + '</div>' if info_parts else ""
 
     # Entry point
     entry = data.get("entry_point", {})
@@ -437,6 +460,22 @@ def render_brief(data: dict) -> str:
     # Warmup history
     warmup_html = _render_warmup(data.get("warmup_history", []))
 
+    # Touchpoint history stub (future EFS/OneKIB integration)
+    touch_history = data.get("touchpoint_history", {})
+    touch_html = ""
+    if touch_history.get("items"):
+        touch_items = "".join(
+            f'<div style="display:flex;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05);">'
+            f'<span style="color:var(--text2);font-size:12px;min-width:60px;">{_esc(it.get("date",""))}</span>'
+            f'<span style="color:var(--text2);font-size:13px;">{_esc(it.get("text",""))}</span></div>'
+            for it in touch_history.get("items", [])
+        )
+        touch_html = f"""<div class="card"><div class="ch" style="color:#bc8cff;">📋 История касаний (ЕФС/OneKIB)</div>
+<div class="cb">{touch_items}</div></div>"""
+    elif touch_history.get("placeholder"):
+        touch_html = f"""<div class="card"><div class="ch" style="color:#bc8cff;">📋 История касаний (ЕФС/OneKIB)</div>
+<div class="cb"><div style="color:var(--text2);font-size:13px;padding:8px 0;">⏳ {_esc(touch_history["placeholder"])}</div></div></div>"""
+
     # Products
     products_html = _render_products(data.get("products", []))
 
@@ -480,8 +519,9 @@ stroke-dasharray="{dash:.1f} {gap:.1f}" stroke-dashoffset="20.4" stroke-linecap=
 transform="rotate(-90 16 16)"/></svg>
 <div><div class="score-val" style="color:{score_color};">{score}</div>
 <div class="score-lbl">/ 100</div></div></div>
-{client_badge}</div></div>{chips_html}</div>
-{entry_html}{trigger_html}{grid1}{fin_html}{warmup_html}{products_html}{connections_html}{grid2}{grid3}
+{client_badge}</div></div>{chips_html}
+{client_info_html}</div>
+{entry_html}{trigger_html}{grid1}{fin_html}{warmup_html}{touch_html}{products_html}{connections_html}{grid2}{grid3}
 <div class="sfooter"><div class="sf-l">
 <strong>🤖 PROACT (Ouroboros)</strong> · /pipeline --smart · {now.strftime("%Y-%m-%d")}</div>
 <div class="sf-r">SCOUT → ANALYST → WARMUP → BRIEF</div></div>
