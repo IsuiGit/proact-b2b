@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PROACT · Бриф встречи · ПАО Газпром</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2330;--border:rgba(255,255,255,0.07);
+--border2:rgba(255,255,255,0.12);--text:#e6edf3;--text2:#8b949e;--text3:#6e7681;
+--blue:#58a6ff;--blue-dim:rgba(88,166,255,0.10);--blue-border:rgba(88,166,255,0.22);
+--green:#3fb950;--green-dim:rgba(63,185,80,0.08);--green-border:rgba(63,185,80,0.22);
+--yellow:#d29922;--yellow-dim:rgba(210,153,34,0.09);--yellow-border:rgba(210,153,34,0.22);
+--orange:#f0883e;--purple:#bc8cff;--teal:#39d3c3;--red:#f85149}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);
+color:var(--text);font-size:13px;line-height:1.55}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:9px 28px;
+display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;gap:12px}
+.logo{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:var(--blue);
+background:var(--blue-dim);border:1px solid var(--blue-border);padding:2px 9px;border-radius:4px;letter-spacing:0.05em}
+.topbar-left{display:flex;align-items:center;gap:10px}
+.topbar-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.crumb{font-size:12px;color:var(--text3)}.crumb span{color:var(--text2)}
+.badge{font-size:11px;font-weight:600;padding:2px 9px;border-radius:20px}
+.badge-green{background:var(--green-dim);border:1px solid var(--green-border);color:var(--green)}
+.badge-blue{background:var(--blue-dim);border:1px solid var(--blue-border);color:var(--blue)}
+.badge-red{background:rgba(248,81,73,0.10);border:1px solid rgba(248,81,73,0.25);color:var(--red)}
+.ts{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3)}
+.page{max-width:900px;margin:0 auto;padding:22px 28px 52px}
+.hero{background:linear-gradient(135deg,#0d1f3c 0%,#1a0d2e 100%);border:1px solid var(--border2);
+border-radius:10px;padding:18px 22px 16px;margin-bottom:14px}
+.hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:12px}
+.hero-name{font-size:20px;font-weight:700}
+.hero-sub{font-size:12px;color:var(--text2);margin-top:3px}
+.hero-sub span{color:var(--text3);margin:0 4px}
+.score-pill{display:flex;align-items:center;gap:8px;background:var(--bg2);
+border:1px solid var(--green-border);border-radius:7px;padding:5px 12px 5px 6px;flex-shrink:0}
+.score-val{font-size:18px;font-weight:700;color:var(--green);font-family:'JetBrains Mono',monospace;line-height:1}
+.score-lbl{font-size:10px;color:var(--text3)}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:11.5px;color:var(--text2);background:rgba(255,255,255,0.03);
+border:1px solid var(--border);border-radius:5px;padding:3px 9px;display:flex;align-items:center;gap:5px}
+.chip .dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.chip strong{color:var(--text);font-weight:500}
+.entry-banner{background:linear-gradient(135deg,rgba(88,166,255,0.07) 0%,transparent 100%);
+border:1px solid var(--blue-border);border-left:3px solid var(--blue);border-radius:9px;
+padding:11px 16px;margin-bottom:14px;font-size:12.5px}
+.entry-banner-title{font-weight:700;color:var(--blue);margin-bottom:4px;font-size:13px}
+.trigger{background:linear-gradient(135deg,rgba(63,185,80,0.06) 0%,transparent 100%);
+border:1px solid var(--green-border);border-left:3px solid var(--green);border-radius:9px;
+padding:13px 18px;margin-bottom:14px;display:flex;align-items:flex-start;gap:14px}
+.trig-icon{font-size:22px;flex-shrink:0;margin-top:1px}
+.trig-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px}
+.trig-desc{font-size:12.5px;color:var(--text2);line-height:1.5}
+.trig-src{font-size:11px;color:var(--text3);margin-top:6px;font-family:'JetBrains Mono',monospace}
+.trig-score{text-align:center;flex-shrink:0}
+.trig-score-val{font-size:22px;font-weight:700;color:var(--green);font-family:'JetBrains Mono',monospace;line-height:1}
+.trig-score-lbl{font-size:10px;color:var(--text3);white-space:nowrap}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:9px;overflow:hidden}
+.ch{font-size:11.5px;font-weight:600;letter-spacing:0.04em;padding:9px 14px 8px;
+border-bottom:1px solid var(--border);text-transform:uppercase}
+.cb{padding:12px 14px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.person{display:flex;gap:11px;padding:8px 0;border-bottom:1px solid var(--border)}
+.person:last-child{border-bottom:none;padding-bottom:0}
+.av{width:34px;height:34px;border-radius:8px;flex-shrink:0;background:linear-gradient(135deg,#1f6feb,#388bfd);
+display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+.p-name{font-size:13px;font-weight:600}.p-role{font-size:11px;color:var(--text2);margin-top:1px}
+.p-note{font-size:11.5px;color:var(--text3);margin-top:3px}
+.tl{display:flex;flex-direction:column}
+.tli{display:grid;grid-template-columns:68px 10px 1fr;align-items:start;padding:5px 0;gap:8px}
+.tld{font-size:11px;color:var(--text3);font-family:'JetBrains Mono',monospace;padding-top:1px}
+.tldot{width:8px;height:8px;border-radius:50%;margin-top:4px}
+.tlt{font-size:12.5px;color:var(--text2)}.tlt strong{color:var(--text)}
+.tl-tag{font-size:10px;font-weight:600;background:var(--green-dim);border:1px solid var(--green-border);
+color:var(--green);padding:1px 6px;border-radius:3px;margin-left:6px;vertical-align:middle}
+.rr{display:flex;align-items:center;justify-content:space-between;padding:5px 0;
+border-bottom:1px solid var(--border);font-size:12px}
+.rr:last-child{border-bottom:none}.rr-l{color:var(--text2)}
+.ok{color:var(--green);font-weight:600}.warn{color:var(--yellow);font-weight:600}.bad{color:var(--red);font-weight:600}
+.ft{width:100%;border-collapse:collapse;font-size:12.5px}
+.ft th{color:var(--text3);font-weight:500;text-align:right;padding:4px 8px;border-bottom:1px solid var(--border)}
+.ft th:first-child{text-align:left}
+.ft td{padding:5px 8px;border-bottom:1px solid var(--border);text-align:right;color:var(--text2)}
+.ft td:first-child{text-align:left;color:var(--text)}
+.ft tr:last-child td{border-bottom:none}
+.up{color:var(--green)}.dn{color:var(--red)}.nu{color:var(--text2)}
+.note-box{margin-top:10px;background:var(--blue-dim);border:1px solid var(--blue-border);
+border-radius:6px;padding:8px 12px;font-size:12px;color:var(--text2)}
+.sdiv{font-size:11px;font-weight:700;letter-spacing:0.08em;color:var(--text3);
+text-transform:uppercase;margin:18px 0 9px}
+.prop{padding:12px 14px;border-bottom:1px solid var(--border)}
+.prop:last-child{border-bottom:none}
+.prop-1{background:rgba(63,185,80,0.03)}.prop-2{background:rgba(88,166,255,0.03)}.prop-3{background:rgba(210,153,34,0.03)}
+.prop-h{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.prop-medal{font-size:16px}.prop-title{font-size:13px;font-weight:600;color:var(--text)}
+.prop-items{list-style:none;padding:0;display:flex;flex-direction:column;gap:4px}
+.prop-items li{font-size:12.5px;color:var(--text2);padding-left:14px;position:relative}
+.prop-items li::before{content:'·';position:absolute;left:4px;color:var(--text3)}
+.prop-why{font-size:11.5px;color:var(--teal);margin-top:7px}
+.gi{display:flex;gap:11px;padding:9px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.gi:last-child{border-bottom:none}.gi-icon{font-size:20px;flex-shrink:0}
+.gi-company{font-size:13px;font-weight:600}.gi-rel{font-size:12px;color:var(--text2);margin-top:2px}
+.gi-tip{font-size:11.5px;color:var(--teal);margin-top:4px}
+.sched{width:100%;border-collapse:collapse;font-size:12px}
+.sched th{color:var(--text3);font-weight:500;padding:4px 8px;border-bottom:1px solid var(--border);text-align:left}
+.sched td{padding:5px 8px;border-bottom:1px solid var(--border);color:var(--text2)}
+.sched tr:last-child td{border-bottom:none}
+.s-time{font-family:'JetBrains Mono',monospace;color:var(--text3)!important;white-space:nowrap}
+.s-block{color:var(--text)!important;font-weight:500}.s-desc{color:var(--text2)!important}
+.ql{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px}
+.ql li{display:flex;gap:9px;font-size:12.5px;color:var(--text2)}
+.qn{flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:600;
+color:var(--blue);background:var(--blue-dim);border:1px solid var(--blue-border);
+padding:1px 5px;border-radius:3px;height:fit-content;margin-top:1px}
+.obj{width:100%;border-collapse:collapse;font-size:12px}
+.obj th{color:var(--text3);font-weight:500;padding:4px 8px;border-bottom:1px solid var(--border);text-align:left}
+.obj td{padding:6px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+.obj tr:last-child td{border-bottom:none}
+.obj-q{color:var(--yellow)!important;font-style:italic;width:42%}.obj-a{color:var(--text2)!important}
+.cl{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px}
+.cl li{display:flex;gap:9px;font-size:12.5px;color:var(--text2);align-items:flex-start}
+.cb-box{flex-shrink:0;width:14px;height:14px;border:1px solid var(--border2);border-radius:3px;margin-top:1px}
+.wh{display:flex;flex-direction:column;gap:0}
+.whi{display:flex;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.whi:last-child{border-bottom:none}
+.wh-date{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);white-space:nowrap;padding-top:1px;min-width:70px}
+.wh-type{font-size:11px;font-weight:600;padding:1px 7px;border-radius:3px;white-space:nowrap}
+.wh-email{background:var(--blue-dim);border:1px solid var(--blue-border);color:var(--blue)}
+.wh-call{background:var(--green-dim);border:1px solid var(--green-border);color:var(--green)}
+.wh-noans{background:rgba(255,255,255,0.04);border:1px solid var(--border2);color:var(--text3)}
+.wh-text{font-size:12px;color:var(--text2)}.wh-text strong{color:var(--text)}
+.sfooter{margin-top:24px;padding:10px 14px;border:1px solid var(--border);border-radius:7px;
+background:var(--bg2);display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:11px;color:var(--text3)}
+.sf-r{font-family:'JetBrains Mono',monospace;flex-shrink:0}
+@media(max-width:640px){.g2{grid-template-columns:1fr}.hero-top{flex-direction:column}}
+</style></head><body>
+<div class="topbar"><div class="topbar-left">
+<span class="logo">PROACT</span>
+<div class="crumb">Агент BRIEF <span>·</span> <span>Бриф встречи</span></div>
+</div><div class="topbar-right">
+<span class="badge badge-green">✓ Готов к использованию</span>
+<span class="ts">17.07.2026 · 08:27</span></div></div>
+<div class="page">
+<div class="hero"><div class="hero-top"><div>
+<div class="hero-name">ПАО Газпром</div>
+<div class="hero-sub">ИНН 7736053147 <span>·</span> Нефтегаз <span>·</span> Москва</div></div>
+<div style="display:flex;align-items:center;gap:8px;">
+<div class="score-pill"><svg width="32" height="32" viewBox="0 0 32 32">
+<circle cx="16" cy="16" r="13" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2.5"/>
+<circle cx="16" cy="16" r="13" fill="none" stroke="#3fb950" stroke-width="2.5"
+stroke-dasharray="71.9 9.8" stroke-dashoffset="20.4" stroke-linecap="round"
+transform="rotate(-90 16 16)"/></svg>
+<div><div class="score-val" style="color:#3fb950;">88</div>
+<div class="score-lbl">/ 100</div></div></div>
+<span class="badge badge-red">🔴 Не клиент Сбера</span></div></div><div class="chips"><div class="chip"><span class="dot" style="background:#3fb950;"></span>Выручка 2025: <strong>8.9 трлн (+6%)</strong></div><div class="chip"><span class="dot" style="background:#58a6ff;"></span>Сотрудников: <strong>300К+</strong></div><div class="chip"><span class="dot" style="background:#f85149;"></span>Обслуживается: <strong>Газпромбанк · ВТБ</strong></div><div class="chip"><span class="dot" style="background:#f0883e;"></span>Изменение УК: <strong>100 млн ₽</strong></div></div></div>
+<div class="entry-banner">
+<div class="entry-banner-title">🔗 Прямой вход через корпоративное событие</div>
+<div style="color:var(--text2);">Газпром проводит дробление акций на 100 млн ₽ — публичное событие через ЕИС. Прямой контакт с казначейством через корпоративный отдел Сбера.</div></div><div class="trigger">
+<div class="trig-icon">⚡</div>
+<div style="flex:1;"><div class="trig-title">Дробление акций на 100 млн ₽ — подготовка к инвестиционному циклу</div>
+<div class="trig-desc">Газпром проводит существенное изменение уставного капитала на 100 млн ₽. Дробление акций такого масштаба обычно предшествует крупному инвестиционному циклу: освоение новых месторождений, модернизация НПЗ, расширение транспортной инфраструктуры. Момент, когда компании нужен надёжный финансовый партнёр для проектного финансирования.</div>
+<div class="trig-src">e_disclosure — 16.07.2026 · обнаружен SCOUT 17.07.2026</div></div>
+<div class="trig-score"><div class="trig-score-val" style="color:#3fb950;">88</div>
+<div class="trig-score-lbl">скоринг лида</div></div></div><div class="g2"><div class="card"><div class="ch" style="color:#58a6ff;">👥 Ключевые контакты</div>
+<div class="cb"><div class="person"><div class="av" style="background:linear-gradient(135deg,#f0883e,#d29922);">АМ</div><div><div class="p-name">Миллер Алексей Борисович</div><div class="p-role">Председатель Правления</div><div class="p-note">Принимает стратегические решения о финансировании. Длинный цикл согласования, но решение окончательное. Работает с Газпромбанком как профильным банком отрасли.</div></div></div><div class="person"><div class="av" style="background:linear-gradient(135deg,#bc8cff,#58a6ff);">ДН</div><div><div class="p-name">Нестеров Денис Александрович</div><div class="p-role">Начальник Департамента казначейства</div><div class="p-note">Ключевой ЛПР по операционному финансированию. Работает с ВТБ по текущим лимитам. Открыт к сравнению условий между банками.</div><div class="p-ok">✓ Подтверждена</div></div></div></div></div><div style="display:flex;flex-direction:column;gap:12px;">
+<div class="card" style="flex:1;"><div class="ch" style="color:#d29922;">📰 События</div>
+<div class="cb"><div class="tl"><div class="tli"><div class="tld">16.07.2026</div><div class="tldot" style="background:#3fb950;"></div><div class="tlt"><strong>Дробление акций</strong> на 100 млн ₽<span class="tl-tag">ТРИГГЕР</span></div></div><div class="tli"><div class="tld">01.06.2026</div><div class="tldot" style="background:#58a6ff;"></div><div class="tlt">Решение о расширении «Сила Сибири»</div></div><div class="tli"><div class="tld">15.03.2026</div><div class="tldot" style="background:#d29922;"></div><div class="tlt">Модернизация Заполярного филиала</div></div><div class="tli"><div class="tld">янв. 2026</div><div class="tldot" style="background:#bc8cff;"></div><div class="tlt">Закупка оборудования для СПГ-проектов</div></div></div></div></div>
+<div class="card"><div class="ch" style="color:#f85149;">🛡 Риск-индикаторы</div>
+<div class="cb"><div class="rr"><span class="rr-l">Судебные иски (активные)</span><span class="ok">✓ ✓ Нет</span></div><div class="rr"><span class="rr-l">Налоговая задолженность</span><span class="ok">✓ ✓ Нет</span></div><div class="rr"><span class="rr-l">Отраслевой риск</span><span class="ok">✓ ✓ Низкий</span></div><div class="rr"><span class="rr-l">Долг / EBITDA</span><span class="ok">✓ ✓ 1.2х — норма</span></div><div class="rr"><span class="rr-l">Конкуренция банков</span><span class="warn">⚠ ⚠ ВТБ, Газпромбанк активно работают</span></div></div></div></div></div><div class="card" style="margin-bottom:12px;">
+<div class="ch" style="color:#3fb950;">📊 Финансовый профиль</div>
+<div class="cb" style="padding:10px 14px;">
+<table class="ft"><thead><tr><th>Показатель</th><th>2024</th><th>2025</th><th>Δ</th></tr></thead>
+<tbody><tr class=""><td>Выручка</td><td>8.4 трлн</td><td>8.9 трлн</td><td><span class="up">+6%</span></td></tr><tr class=""><td>EBITDA</td><td>2.1 трлн</td><td>2.4 трлн</td><td><span class="up">+14%</span></td></tr><tr class=""><td>Чистая прибыль</td><td>1.2 трлн</td><td>1.4 трлн</td><td><span class="up">+17%</span></td></tr><tr class=""><td>Капитальные затраты</td><td>1.8 трлн</td><td>2.1 трлн</td><td><span class="up">+17%</span></td></tr><tr class=""><td>Долг / EBITDA</td><td>1.4х</td><td>1.2х</td><td><span class="dn">↓ улучш.</span></td></tr></tbody></table><div class="note-box"><strong>💡 Инсайт:</strong> Капзатраты растут на 17% — компания в активной инвестиционной фазе. Увеличение УК на 100 млн ₽ — подготовка к новому циклу. Потребность в синдицированном финансировании до 10 млрд ₽.</div></div></div><div class="card" style="margin-bottom:12px;">
+<div class="ch" style="color:#bc8cff;">📨 История касаний</div><div class="cb">
+<div class="wh"><div class="whi"><div class="wh-date">17.07.2026</div><span class="wh-type wh-email">Email</span><div class="wh-text">Письмо Нестерову Д.А. — предложение синдицированной кредитной линии под инвестиционный цикл. Тема: <strong>«Денис Александрович, финансирование для нового цикла Газпрома»</strong></div></div><div class="whi"><div class="wh-date">—</div><span class="wh-type wh-noans">Без ответа</span><div class="wh-text">Ожидаем ответа. Повторный контакт через 3 рабочих дня</div></div></div></div></div><div class="sdiv">💡 Продуктовое предложение</div>
+<div class="card" style="margin-bottom:12px;"><div class="cb" style="padding:14px;"><div class="prop prop-1"><div class="prop-h"><div class="prop-medal">🥇</div><div class="prop-title">Синдицированная кредитная линия до 10 млрд ₽</div><span class="badge badge-blue" style="margin-left:auto;font-size:10.5px;">Открывать встречу</span></div><ul class="prop-items"><li>Ставка от 10,8% (ниже Газпромбанка 11,0%)</li><li>Срок до 7 лет (vs типовые 5 лет у ВТБ)</li><li>Обеспечение гибкое — добычные активы</li><li>Лимит согласуется заранее — используете по мере необходимости</li></ul><div class="prop-why">Капзатраты растут на 17%, компания в инвестиционной фазе. Синдицированное финансирование снижает ставку за счёт разделения риска между банками.</div></div><div class="prop prop-2"><div class="prop-h"><div class="prop-medal">🥈</div><div class="prop-title">ВЭД-комплекс: валютный контроль + хеджирование</div></div><ul class="prop-items"><li>Аккредитивы от 0,2%</li><li>Хеджирование цен на углеводороды — фиксация экспортной выручки</li><li>Валютный контроль — всё в одном окне</li></ul><div class="prop-why">Дополнение к кредиту: кредит финансирует инвестиции, а ВЭД решает другую задачу — защиту экспортной выручки от ценовых колебаний</div></div><div class="prop prop-3"><div class="prop-h"><div class="prop-medal">🥉</div><div class="prop-title">РКО с API-интеграцией (тариф «Корпорация»)</div></div><ul class="prop-items"><li>0 за переводы до 50 млн ₽</li><li>Интеграция с ERP через API</li><li>Зарплатный проект — 5% кэшбэк для 300К+ сотрудников</li></ul></div></div></div><div class="card" style="margin-bottom:12px;">
+<div class="ch" style="color:#39d3c3;">🕸 Связи с клиентами Сбера</div>
+<div class="cb"><div class="gi"><div class="gi-icon">🏗️</div><div><div class="gi-company">ПАО Северсталь</div><div class="gi-rel">Клиент Сбера (кредит 5 млрд) · Газпром — ключевой поставщик газа для заводов</div><div class="gi-tip">💡 Использовать как аргумент экосистемы: «Газпром уже обслуживается через ту же инфраструктуру, что и Северсталь»</div></div></div></div></div><div class="g2"><div class="card"><div class="ch" style="color:#bc8cff;">🕐 Структура встречи</div>
+<div class="cb" style="padding:10px 14px;"><table class="sched">
+<thead><tr><th>Время</th><th>Блок</th><th>Фокус</th></tr></thead><tbody><tr><td class="s-time">0–5</td><td class="s-block">Контакт</td><td class="s-desc">Поздравить с началом инвестиционного цикла, познакомиться с казначейством</td></tr><tr><td class="s-time">5–15</td><td class="s-block">Диагностика</td><td class="s-desc">«Дробление акций на 100 млн ₽ — связано ли с конкретными проектами?»</td></tr><tr><td class="s-time">15–30</td><td class="s-block">Предложение</td><td class="s-desc">Синдицированная кредитная линия 10 млрд под 10,8% + ВЭД-комплекс</td></tr><tr><td class="s-time">30–40</td><td class="s-block">Возражения</td><td class="s-desc">Сравнение с Газпромбанком (11,0%) и ВТБ (11,5%) — показать экономию</td></tr><tr><td class="s-time">40–45</td><td class="s-block">Следующий шаг</td><td class="s-desc">КП на 2 млрд ₽ до среды, встреча с финдиректором</td></tr></tbody></table></div></div><div class="card"><div class="ch" style="color:#58a6ff;">❓ Рекомендуемые вопросы</div>
+<div class="cb"><ul class="ql"><li><span class="qn">Q1</span>Дробление акций на 100 млн ₽ — связано ли это с конкретными проектами «Сила Сибири» или газификацией?</li><li><span class="qn">Q2</span>Как сейчас распределено финансирование между Газпромбанком и ВТБ? Какую долю занимает каждый?</li><li><span class="qn">Q3</span>Какие параметры финансирования были бы принципиально важны — ставка, срок или обеспечение?</li><li><span class="qn">Q4</span>Есть ли потребность в хеджировании экспортной выручки при текущих ценах на углеводороды?</li></ul></div></div></div><div class="g2" style="margin-top:12px;"><div class="card"><div class="ch" style="color:#d29922;">⚠️ Возражения и ответы</div>
+<div class="cb" style="padding:10px 14px;"><table class="obj">
+<thead><tr><th>Возражение</th><th>Контраргумент</th></tr></thead><tbody><tr><td class="obj-q">«Нас устраивает Газпромбанк — это профильный банк»</td><td class="obj-a">«Не предлагаем уходить — предлагаем синдицированное финансирование, где Газпромбанк может участвовать как один из банков-партнёров. Ставка ниже за счёт распределения риска»</td></tr><tr><td class="obj-q">«Ставка в Газпромбанке 11,0% — зачем нам выше?»</td><td class="obj-a">«Наше предложение 10,8% — ниже. Плюс срок до 7 лет (у них 5) и бесплатное РКО на первый год. Экономия: 0,2% × 10 млрд = 20 млн ₽/год»</td></tr><tr><td class="obj-q">«Долго согласовывают синдицированное финансирование»</td><td class="obj-a">«Предодобренный лимит доступен через 5 рабочих дней. Параллельно подготовим КП с конкретными цифрами. Газпромбанк будет включён в синдикат по умолчанию»</td></tr><tr><td class="obj-q">«Нужно согласовать с Миллером»</td><td class="obj-a">«Готовлю КП на уровне Правления с расчётом экономии относительно текущих условий. Промежуточный контакт через 2 недели»</td></tr></tbody></table></div></div><div class="card"><div class="ch" style="color:#3fb950;">📎 Взять на встречу</div>
+<div class="cb"><ul class="cl"><li><div class="cb-box"></div>Презентация «Синдицированное финансирование для нефтегазовых проектов» + ставка 10,8%</li><li><div class="cb-box"></div>Сравнительная таблица: Сбер vs ВТБ (11,5%) vs Газпромбанк (11,0%) — экономия 20 млн ₽/год</li><li><div class="cb-box"></div>1-страничный флаер «ВЭД-комплекс: хеджирование цен на углеводороды»</li><li><div class="cb-box"></div>Условия по зарплатному проекту для 300К+ сотрудников — 5% кэшбэк</li><li><div class="cb-box"></div>Контакты корпоративного отдела Сбера для координации с Газпромбанком</li></ul></div></div></div>
+<div class="sfooter"><div class="sf-l">
+<strong>🤖 PROACT (Ouroboros)</strong> · /pipeline --smart · 2026-07-17</div>
+<div class="sf-r">SCOUT → ANALYST → WARMUP → BRIEF</div></div>
+</div></body></html>
