@@ -197,6 +197,22 @@ def main() -> None:
             report_path = generate_report(_OUT)
             print(f"HTML_REPORT_READY:{report_path}")
 
+            # ── Generate per-company HTML briefs ──
+            try:
+                from brief_html_generator import generate_brief_html
+                briefs_json_dir = os.path.join(_OUT, "briefs_json")
+                if os.path.isdir(briefs_json_dir):
+                    briefs_out = os.path.join(
+                        os.path.dirname(_OUT), "reports", "briefs")
+                    os.makedirs(briefs_out, exist_ok=True)
+                    for jf in sorted(os.listdir(briefs_json_dir)):
+                        if jf.endswith('.json'):
+                            bp = generate_brief_html(
+                                os.path.join(briefs_json_dir, jf), briefs_out)
+                            print(f"HTML_BRIEF_READY:{bp}")
+            except Exception as e:
+                print(f"BRIEF_GEN_SKIP:{e}")
+
         return
 
     # ── Handle --result (record contact and exit) ─────────────────
